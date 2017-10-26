@@ -1,0 +1,42 @@
+
+.FirstScreen {
+  background: url(./assets/bg.jpg) no-repeat center center;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+
+  &.hidden {
+    display: none;
+  }
+
+  &-content {
+    width: 500px;
+    margin: 16% 0 0 10%;
+  }
+
+  &-heading {
+    text-transform: uppercase;
+    font-size: 3em;
+    margin: 0 0 10%;
+    font-weight: 700;
+    span {
+      color: map-get($theme-colors, purple);
+    }
+  }
+
+  &-text {
+    margin: 0 0 15%;
+    width: 80%;
+    line-height: 160%;
+  }
+
+  .btn {
+    letter-spacing: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}

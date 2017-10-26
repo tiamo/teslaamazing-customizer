@@ -1,0 +1,58 @@
+//$theme-colors: (
+//        "primary": #0074d9,
+//        "danger": #ff4136
+//);
+
+$classic-colors: (
+        yellow: #eadb3f,
+        blue: #1cb0d5,
+        green: #74ba32,
+        orange: #e67924,
+        pink: #e391c4,
+        violet: #9b4fa7,
+        white: #f8f8f8,
+        transparent: #eee,
+);
+$pastel-colors: (
+        aqua: #b0e2e2,
+        mint: #c2df87,
+        peachy: #ffbe9e,
+        pearl: #dac4e5,
+        spring: #ffb4aa,
+        sunshine: #f9df8d,
+);
+
+$product-colors: map-merge($classic-colors, $pastel-colors);
+
+$theme-colors: map-merge((
+        primary: #f74561,
+        secondary: #747474,
+        success: #28a745,
+        info: #17a2b8,
+        warning: #ffc107,
+        danger: #dc3545,
+        light: #f8f9fa,
+        dark: #343a40,
+  // custom colors
+        purple: #c34dee,
+), $product-colors);
+
+$link-decoration: underline;
+$link-hover-decoration: none;
+
+$input-btn-padding-y-lg: 0.9rem;
+$input-btn-padding-x-lg: 1.2rem;
+
+$input-placeholder-color: #9D9D9D;
+$input-border-color: #95989A;
+$input-btn-border-width: 2px;
+//$input-btn-line-height-lg: 2.5;
+
+$input-border-radius: 0;
+$input-border-radius-sm: 0;
+$input-border-radius-lg: 0;
+
+$btn-font-weight: 300;
+$btn-border-radius: 0;
+$btn-border-radius-lg: 0;
+$btn-border-radius-sm: 0;
