@@ -208,18 +208,14 @@ export class Three extends Component {
 
   animatePreviewer = highlightPreview => {
     clearTimeout(this.t);
-    this.t = setTimeout(()=>{
+    this.t = setTimeout(() => {
       this.setState({highlightPreview})
     }, 400);
   };
 
   renderSections(items) {
     return Object.keys(items).map((i) => (
-      <div key={i} className="item" onMouseEnter={() => {
-        return this.animatePreviewer(i);
-      }} onMouseLeave={() => {
-        return this.animatePreviewer(null);
-      }}>
+      <div key={i} className="item">
         <div className="item-heading">{items[i].title}</div>
         <div className="item-body">
           {this.state[i] ? (
@@ -244,6 +240,12 @@ export class Three extends Component {
                 }}
                 onDragOver={(e) => {
                   console.log(e);
+                }}
+                onMouseEnter={() => {
+                  return this.animatePreviewer(i);
+                }}
+                onMouseLeave={() => {
+                  return this.animatePreviewer(null);
                 }}
               >
                 Select layout
@@ -279,7 +281,7 @@ export class Three extends Component {
           <Col lg="6" xs="12">
             {/*<div className="jumbotron">*/}
 
-              <Previewer highlight={this.state.highlightPreview}/>
+            <Previewer highlight={this.state.highlightPreview}/>
 
             {/*</div>*/}
           </Col>
