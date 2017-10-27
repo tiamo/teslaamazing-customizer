@@ -116,6 +116,13 @@ $border-width: 0;
             }
           }
         }
+
+        svg {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          z-index:100;
+        }
       }
 
       &.back {
@@ -142,7 +149,7 @@ $border-width: 0;
               //transform: rotateX(90deg) rotateZ(90deg) translateZ(-140px) translateX(2px) translateY(-78px);
             }
             &:after {
-              transform: translateY($height);
+              //transform: translateY($height);
               //transform: rotateX(90deg) rotateZ(90deg) translateZ(80px) translateX(2px) translateY(-78px);
             }
           }
@@ -190,7 +197,7 @@ $border-width: 0;
           > li {
             &:first-child {
               @if $name == transparent {
-                background: url(./assets/transparent.png) repeat !important;
+                background: url(./assets/transparent.gif) repeat !important;
               } @else {
                 background-color: $color;
               }
@@ -199,7 +206,11 @@ $border-width: 0;
         }
         .page {
           > li {
-            background: lighten($color, 10);
+            @if $name == transparent {
+              background: transparent;
+            } @else {
+              background: lighten($color, 10);
+            }
           }
         }
       }
@@ -207,14 +218,14 @@ $border-width: 0;
 
     // Sizes
 
-    &.size-l {
-      .front {
-        .image {
-          background-image: url(./assets/note-l.svg);
-          width: 100%;
-          height: 100%;
-        }
-      }
+    &.size-s {
+      width: 210px !important;
+      height: 150px !important;
+    }
+
+    &.size-m {
+      width: 300px !important;
+      height: 210px !important;
     }
 
     // Animation
@@ -230,7 +241,7 @@ $border-width: 0;
     }
 
     &.highlight-frontOuter {
-      transform: translateY($height / 2) scale(1.1);
+      transform: translateY(100px) scale(1.1);
       .cover.front {
 
         transform: rotateX(155deg);
@@ -245,7 +256,7 @@ $border-width: 0;
     }
 
     &.highlight-backInner {
-      transform: translateY($height / 2) scale(1.1);
+      transform: translateY(100px) scale(1.1);
       .cover.front {
 
         transform: rotateX(155deg);
@@ -274,7 +285,7 @@ $border-width: 0;
     }
 
     &.highlight-backOuter {
-      transform: translateY($height) scale(1.1);
+      transform: translateY(200px) scale(1.1);
         //transform: translateY(100px);
 
       .cover.front {
@@ -305,32 +316,34 @@ $border-width: 0;
         }
       }
     }
-  }
 
-  &:hover {
-    .cover.front {
-      transform: rotateX(65deg) translateZ(0);
-      //z-index: 0;
-    }
-    .page {
-      li {
-        $i: 0;
-        @while $i < $pages-count {
-          &:nth-child(#{$i}) {
+    &:hover {
+      transform: translateY(10px) scale(1);
+      .cover.front {
+        transform: rotateX(65deg) translateZ(0);
+        //z-index: 0;
+      }
+      .page {
+        li {
+          $i: 0;
+          @while $i < $pages-count {
+            &:nth-child(#{$i}) {
 
-            $deg: $initial-deg + $i * 1.1;
+              $deg: $initial-deg + $i * 1.1;
 
-            //@if $i > 8 {
-            //  $deg: $initial-deg -5 + $i*2;
-            //}
+              //@if $i > 8 {
+              //  $deg: $initial-deg -5 + $i*2;
+              //}
 
-            transform: rotateX($deg+ deg);
-            //transition-duration: ($i * 0.6) + s;
+              transform: rotateX($deg+ deg);
+              //transition-duration: ($i * 0.6) + s;
+            }
+            $i: $i + 1;
           }
-          $i: $i + 1;
         }
       }
     }
+
   }
 
   //@keyframes open-front {

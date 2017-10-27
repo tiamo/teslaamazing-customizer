@@ -1,4 +1,6 @@
 
+export const TECHNICAL_REQUIREMENTS_URL = "https://teslaamazing.com";
+
 export const MAX_QTY = 99999;
 
 export const LAYOUTS = {

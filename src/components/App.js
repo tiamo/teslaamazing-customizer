@@ -1,71 +1,88 @@
 import React, {Component} from 'react';
-import logo from '../assets/logo.svg';
 import FirstScreen from "./FirstScreen";
 import OrderForm from "./OrderForm";
 import * as Steps from "./Steps";
+import {Fade, Modal, ModalBody} from "reactstrap";
+import Logo from "./Svg/Logo";
+
+// TODO: redux ?
+let initialData = {
+  name: '',
+  product: '',
+  frontInner: '',
+  frontOuter: '',
+  backInner: '',
+  backOuter: '',
+  items: {
+    // "008": 12
+  },
+};
+
+class Header extends Component {
+  render() {
+    return (
+      <header className="Header">
+        <a href="/" className="Header-logo">
+          <Logo/>
+        </a>
+        <span className="Header-title">Customizer</span>
+      </header>
+    );
+  }
+}
 
 class App extends Component {
-  render() {
 
-    let showFirstScreen = true;
-
-    // TODO: redux ?
-    let store = {
-      name: '',
-      product: '',
-      frontInner: '',
-      frontOuter: '',
-      backInner: '',
-      backOuter: '',
-      items: {
-        // "008": 12
-      },
+  constructor(props) {
+    super(props);
+    this.state = {
+      showFirstScreen: true,
+      showModal: false,
+      modalContent: ""
     };
+  }
 
-    // initial step
-    let step = 1;
-    // if (store.name !== '') {
-    //   step = 2;
-    //   if (store.product !== '') {
-    //     step = 3;
-    //   }
-    // }
-    // step = 4;
-
-    let steps = [
-      {
-        title: 'Name the project',
-        component: Steps.One
-      },
-      {
-        title: 'Chose a product',
-        component: Steps.Two
-      },
-      {
-        title: 'Upload your layouts',
-        component: Steps.Three
-      },
-      {
-        title: 'Pickup inner color',
-        component: Steps.Four
-      },
-    ];
-
+  render() {
     return (
       <div className="App">
-        <FirstScreen active={showFirstScreen}/>
-        <div className="container">
-          <header className="App-header">
-            <a href="/"><img src={logo} className="App-logo" alt="logo"/></a>
-            <span className="App-title">Customizer</span>
-          </header>
+        <Fade in={this.state.showFirstScreen} unmountOnExit={true}>
+          <FirstScreen onClick={() => {
+            this.setState({showFirstScreen: false})
+          }}/>
+        </Fade>
+        <Fade className="container" in={!this.state.showFirstScreen}>
+          <Header/>
           <div className="App-main">
-            <OrderForm step={step} steps={steps} store={store}/>
+            <OrderForm data={initialData} onSubmit={this.handleSubmit}>
+              <Steps.One title="Name the project"/>
+              <Steps.Two title="Chose a product"/>
+              <Steps.Three title="Upload your layouts"/>
+              <Steps.Four title="Pickup inner color"/>
+            </OrderForm>
           </div>
-        </div>
+        </Fade>
+        <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
+          <ModalBody className="alert alert-success m-0">
+            {this.state.modalContent}
+          </ModalBody>
+        </Modal>
       </div>
     );
   }
+
+  toggleModal = e => {
+    this.setState({
+      showModal: !this.state.showModal
+    });
+  };
+
+  handleSubmit = data => {
+    this.setState({
+      showModal: true,
+      modalContent: <pre>{JSON.stringify(data, null, 4)}</pre>,
+    });
+  }
+
 }
 
 export default App;

@@ -3,7 +3,6 @@ import {
   Badge,
   Button,
   Col,
-  Fade,
   FormFeedback,
   FormGroup,
   Input,
@@ -13,7 +12,7 @@ import {
   Row
 } from 'reactstrap';
 import Dropzone from 'react-dropzone';
-import {LAYOUTS, MAX_QTY, PRODUCTS_MAP} from "../constants";
+import {LAYOUTS, MAX_QTY, PRODUCTS_MAP, TECHNICAL_REQUIREMENTS_URL} from "../constants";
 import classNames from "classnames"
 import Previewer from "./Previewer";
 
@@ -21,8 +20,7 @@ export class One extends Component {
 
   constructor(props) {
     super(props);
-
-    let value = this.props.getStore().name;
+    let value = this.props.getStore().name || "";
     this.state = {
       valid: value !== '' ? true : null,
       error: null,
@@ -31,7 +29,7 @@ export class One extends Component {
   }
 
   validate() {
-    if (this.state.value === '') {
+    if (this.state.value === "") {
       this.setState({valid: false, error: 'Please enter the name of your project.'});
     }
     this.props.updateStore({
@@ -51,16 +49,15 @@ export class One extends Component {
 
   render() {
     return (
-      <div className="StepOne">
-        <FormGroup>
-          <Input size="lg"
-                 valid={this.state.valid}
-                 placeholder="Insert name of your project"
-                 defaultValue={this.state.value}
-                 onChange={this.handleChange}/>
-          <FormFeedback>{this.state.error}</FormFeedback>
-        </FormGroup>
-      </div>
+      <FormGroup>
+        <Input size="lg"
+               ref="input"
+               valid={this.state.valid}
+               placeholder="Insert name of your project"
+               defaultValue={this.state.value}
+               onChange={this.handleChange}/>
+        <FormFeedback>{this.state.error}</FormFeedback>
+      </FormGroup>
     );
   }
 }
@@ -101,7 +98,7 @@ export class Two extends Component {
   renderProducts(products) {
     return products.map((product) => (
       <td key={product.name}
-          className={"StepTwo-product StepTwo-product-" + product.name.toLowerCase()}>
+          className={"product product--" + product.name.toLowerCase()}>
         <FormGroup className={this.state.value === product.name ? "checked" : null}>
           <Label>
             <div className="product-box"></div>
@@ -124,7 +121,7 @@ export class Two extends Component {
 
   render() {
     return (
-      <div className="StepTwo">
+      <div>
         <Row>
           <Col lg="6" xs="12">
             <h2>Magnetic Notes</h2>
@@ -164,12 +161,12 @@ export class Three extends Component {
 
   constructor(props) {
     super(props);
-    let store = this.props.getStore();
+    this.store = this.props.getStore();
     this.state = {
-      frontInner: store.frontInner,
-      frontOuter: store.frontOuter,
-      backInner: store.backInner,
-      backOuter: store.backOuter,
+      frontInner: this.store.frontInner,
+      frontOuter: this.store.frontOuter,
+      backInner: this.store.backInner,
+      backOuter: this.store.backOuter,
       isDragging: false,
       highlightPreview: null,
     };
@@ -264,14 +261,14 @@ export class Three extends Component {
 
   render() {
     return (
-      <Fade className={"StepThree" + (this.state.isDragging ? " is-dragging" : "")}>
+      <div className={this.state.isDragging ? " is-dragging" : ""}>
         <Row>
           <Col lg="6" xs="12">
             <p>
               You mockups must be strictly in PDF format.
               Please, make sure that your files comply with all the
               {" "}
-              <a target="_blank" rel="noopener noreferrer" href="https://teslaamazing.com">
+              <a target="_blank" rel="noopener noreferrer" href={TECHNICAL_REQUIREMENTS_URL}>
                 technical requirements
               </a>
             </p>
@@ -279,14 +276,10 @@ export class Three extends Component {
             {this.renderSections(this.props.sections)}
           </Col>
           <Col lg="6" xs="12">
-            {/*<div className="jumbotron">*/}
-
-            <Previewer highlight={this.state.highlightPreview}/>
-
-            {/*</div>*/}
+            <Previewer size={this.store.product} highlight={this.state.highlightPreview}/>
           </Col>
         </Row>
-      </Fade>
+      </div>
     );
   }
 }
@@ -353,7 +346,7 @@ export class Four extends Component {
         <div key={sku} className="card">
           <div className="card-body">
             <div className="card-img">
-              <Previewer color={color}/>
+              <Previewer size={this.store.product} color={color}/>
             </div>
             <div className="card-text">{qty} pcs</div>
           </div>
@@ -369,9 +362,13 @@ export class Four extends Component {
   }
 
   render() {
-    let catalog = PRODUCTS_MAP[this.store.product].catalog || [];
+    const product = PRODUCTS_MAP[this.store.product];
+    if (!product) {
+      return "";
+    }
+    const catalog = product.catalog || [];
     return (
-      <Fade className="StepFour">
+      <div>
         <Row>
           <Col lg="5" xs="12">
             <div className="inputs">
@@ -379,13 +376,13 @@ export class Four extends Component {
             </div>
           </Col>
           <Col lg="7" xs="12">
-            <Previewer color={this.state.color}/>
+            <Previewer size={this.store.product} color={this.state.color}/>
             <div className="products">
               {this.renderProducts(catalog)}
             </div>
           </Col>
         </Row>
-      </Fade>
+      </div>
     );
   }
 
@@ -397,7 +394,7 @@ export class Four extends Component {
 
   handleChange = e => {
     // only numbers
-    let value = parseInt(e.target.value.replace(/\D/g, ''));
+    let value = parseInt(e.target.value.replace(/\D/g, ''), 10);
     const items = Object.assign({}, this.state.items);
 
     if (value > MAX_QTY) {

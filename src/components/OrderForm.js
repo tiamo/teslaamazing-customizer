@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Fade, Form, Modal, ModalBody} from 'reactstrap';
+import classNames from "classnames"
+import {Button, Fade, Form} from 'reactstrap';
 
 export default class OrderForm extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      step: props.step || 1,
-      modal: false,
-      result: "",
+      step: this.props.step || 1,
+      data: this.props.data || {},
+      errors: [],
     };
-    this.store = this.props.store || {};
   }
 
   componentDidMount() {
@@ -22,113 +22,95 @@ export default class OrderForm extends Component {
     document.removeEventListener("keydown", this.handleKeydown, false);
   }
 
+  currentStep() {
+    return this.props.children[this.state.step - 1];
+  }
+
+  renderTitle() {
+    return this.currentStep().props.title;
+  }
+
+  renderSteps() {
+
+    return React.Children.map(this.props.children, (child, i) => {
+      const step = i + 1;
+      const active = this.state.step == step;
+      const classes = {step: true};
+      classes["step-" + step] = true;
+
+      return (
+        <Fade in={active}
+              className={classNames(classes)}
+              mountOnEnter={true}
+              unmountOnExit={true}
+              timeout={{enter: 150, exit: 0}}
+        >
+          {React.cloneElement(child, {
+            ref: active ? "active" : null,
+            getStore: () => {
+              return this.state.data
+            },
+            updateStore: (data) => {
+              this.setState({
+                data: {...this.state.data, ...data}
+              });
+            }
+          })}
+        </Fade>
+      );
+    });
+  }
+
   render() {
-
-    const step = this.currentStep();
-
-    const componentPointer = <step.component
-      getStore={() => (this.getStore())}
-      updateStore={(e) => {
-        this.updateStore(e)
-      }}
-    />;
-
-    // clone the step component dynamically and tag it as activeComponent so we can validate it on next. also bind the jumpToStep piping method
-    let cloneExtensions = {};
-
-    // can only update refs if its a regular React component (not a pure component), so lets check that
-    if (componentPointer instanceof Component || // unit test deteceted that instanceof Component can be in either of these locations so test both (not sure why this is the case)
-      (componentPointer.type && componentPointer.type.prototype instanceof Component)) {
-      cloneExtensions.ref = 'activeComponent';
-    }
-
-    let compToRender = React.cloneElement(componentPointer, cloneExtensions);
-
     return (
-      <Fade>
-        <Form className="OrderForm">
+      <Fade className="OrderForm">
+        <Form onSubmit={this.handleSubmit}>
           <div className="OrderForm-header">
             <span>{this.state.step}</span>
-            {step.title}
+            {this.renderTitle()}
           </div>
           <div className="OrderForm-body">
-            {compToRender}
+            {this.renderSteps()}
           </div>
           <div className="OrderForm-footer">
             {this.state.step > 1 && (
               <Button color="outline-secondary" size="lg" onClick={this.prev}>Prev Step</Button>
             )}
-            {this.state.step < this.props.steps.length && (
+            {this.state.step < this.props.children.length ? (
               <Button color="outline-secondary" size="lg" onClick={this.next}>Next Step</Button>
-            )}
-            {this.state.step >= this.props.steps.length && (
-              <Button color="primary" size="lg" onClick={this.process}>Place Order</Button>
+            ) : (
+              <Button color="primary" size="lg" onClick={this.next}>Place Order</Button>
             )}
           </div>
         </Form>
-        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-          <ModalBody className="alert alert-success m-0">
-            {this.state.result}
-          </ModalBody>
-        </Modal>
       </Fade>
     );
   }
 
-  currentStep() {
-    return this.props.steps[this.state.step - 1];
-  }
-
-  getStore() {
-    return this.store;
-  }
-
-  updateStore(update) {
-    this.store = {
-      ...this.store,
-      ...update,
-    }
-  }
-
-  resetStore() {
-    this.store = this.props.store || {};
-  }
-
-  toggleModal = e => {
-    this.setState({
-      modal: !this.state.modal
-    });
-  };
-
-  process = e => {
-    if (this.validate()) {
-      this.setState({
-        result: <pre>{JSON.stringify(this.store, null, 4)}</pre>
-      });
-      this.toggleModal();
-    }
-  };
-
-  prev = e => {
-    let n = this.state.step - 1;
-    if (n > 0) {
-      this.setState({step: n})
-    }
-  };
-
   validate() {
-    let s = this.refs.activeComponent;
+    let s = this.refs.active;
     if (s !== undefined && s.validate !== undefined) {
       return s.validate();
     }
     return true;
   }
 
+  prev = e => {
+    let s = this.state.step - 1;
+    if (s > 0) {
+      this.setState({step: s})
+    }
+  };
+
   next = e => {
     if (this.validate()) {
-      let n = this.state.step + 1;
-      if (n < this.props.steps.length + 1) {
-        this.setState({step: n})
+      let s = this.state.step + 1;
+      if (s < this.props.children.length + 1) {
+        this.setState({step: s})
+      } else {
+        if (this.props.onSubmit !== undefined) {
+          this.props.onSubmit(this.state.data);
+        }
       }
     }
   };
@@ -143,13 +125,20 @@ export default class OrderForm extends Component {
         this.next(e);
         break;
     }
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.next(e);
+    return false;
   }
 }
 
 OrderForm.propTypes = {
-  steps: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    component: PropTypes.isRequired
-  })).isRequired,
-  store: PropTypes.object
+  // children: PropTypes.arrayOf(PropTypes.shape({
+  //   title: PropTypes.string.isRequired,
+  //   component: PropTypes.isRequired
+  // })).isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  data: PropTypes.object
 };
