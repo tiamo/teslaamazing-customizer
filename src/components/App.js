@@ -1,42 +1,44 @@
 import React, {Component} from 'react';
+import {Fade, Modal, ModalBody} from "reactstrap";
 import FirstScreen from "./FirstScreen";
 import OrderForm from "./OrderForm";
-import * as Steps from "./Steps";
-import {Fade, Modal, ModalBody} from "reactstrap";
+import StepOne from "./OrderForm/StepOne";
+import StepTwo from "./OrderForm/StepTwo";
+import StepThree from "./OrderForm/StepThree";
+import StepFour from "./OrderForm/StepFour";
 import Logo from "./Svg/Logo";
+
+// import asyncComponent from "./AsyncComponent";
+// const StepThree = asyncComponent(() => import("./OrderForm/StepThree"));
 
 // TODO: redux ?
 let initialData = {
   name: '',
   product: '',
-  frontInner: '',
-  frontOuter: '',
-  backInner: '',
-  backOuter: '',
+  frontInner: null,
+  frontOuter: null,
+  backInner: null,
+  backOuter: null,
   items: {
     // "008": 12
   },
 };
 
-class Header extends Component {
-  render() {
-    return (
-      <header className="Header">
-        <a href="/" className="Header-logo">
-          <Logo/>
-        </a>
-        <span className="Header-title">Customizer</span>
-      </header>
-    );
-  }
-}
+const Header = () => (
+  <header className="Header">
+    <a href="/" className="Header-logo">
+      <Logo/>
+    </a>
+    <span className="Header-title">Customizer</span>
+  </header>
+);
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      showFirstScreen: true,
+      showFirstScreen: process.env.NODE_ENV !== 'development',
       showModal: false,
       modalContent: ""
     };
@@ -54,10 +56,10 @@ class App extends Component {
           <Header/>
           <div className="App-main">
             <OrderForm data={initialData} onSubmit={this.handleSubmit}>
-              <Steps.One title="Name the project"/>
-              <Steps.Two title="Chose a product"/>
-              <Steps.Three title="Upload your layouts"/>
-              <Steps.Four title="Pickup inner color"/>
+              <StepOne title="Name the project"/>
+              <StepTwo title="Chose a product"/>
+              <StepThree title="Upload your layouts"/>
+              <StepFour title="Pickup inner color"/>
             </OrderForm>
           </div>
         </Fade>
@@ -70,12 +72,18 @@ class App extends Component {
     );
   }
 
+  /**
+   * @param {Event} e
+   */
   toggleModal = e => {
     this.setState({
       showModal: !this.state.showModal
     });
   };
 
+  /**
+   * @param {Object} data
+   */
   handleSubmit = data => {
     this.setState({
       showModal: true,

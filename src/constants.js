@@ -3,20 +3,9 @@ export const TECHNICAL_REQUIREMENTS_URL = "https://teslaamazing.com";
 
 export const MAX_QTY = 99999;
 
-export const LAYOUTS = {
-  frontInner: {
-    title: "01 Front Inner"
-  },
-  frontOuter: {
-    title: "02 Front Outer"
-  },
-  backInner: {
-    title: "03 Back Inner"
-  },
-  backOuter: {
-    title: "04 Back Outer"
-  },
-};
+export const PRODUCT_SIZE_FACTOR = 0.352778;
+export const PRODUCT_SIZE_UNIT = 'mm';
+export const PDF_BORDER_SIZE = 4;
 
 export const PRODUCTS_MAP = {
 
@@ -24,7 +13,7 @@ export const PRODUCTS_MAP = {
 
   S: {
     name: "S",
-    size: "70 x 50 mm",
+    size: [70, 50],
     catalog: [
       {
         title: "Classic Colors",
@@ -97,7 +86,7 @@ export const PRODUCTS_MAP = {
 
   M: {
     name: "M",
-    size: "100 x 70 mm",
+    size: [100, 70],
     catalog: [
       {
         title: "Classic Colors",
@@ -170,7 +159,7 @@ export const PRODUCTS_MAP = {
 
   L: {
     name: "L",
-    size: "200 x 100 mm",
+    size: [200, 100],
     catalog: [
       {
         title: "Classic Colors",
@@ -245,7 +234,7 @@ export const PRODUCTS_MAP = {
 
   A5: {
     name: "A5",
-    size: "148 x 210 mm",
+    size: [148, 210],
     catalog: [
       {
         title: "Classic Colors",
@@ -289,7 +278,7 @@ export const PRODUCTS_MAP = {
 
   A4: {
     name: "A4",
-    size: "210 x 297 mm",
+    size: [210, 297],
     catalog: [
       {
         title: "Classic Colors",
@@ -333,7 +322,7 @@ export const PRODUCTS_MAP = {
 
   A3: {
     name: "A3",
-    size: "297 x 420 mm",
+    size: [297, 420],
     catalog: [
       {
         title: "Classic Colors",

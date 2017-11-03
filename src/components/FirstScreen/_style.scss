@@ -15,29 +15,33 @@
   }
 
   &-content {
-    width: 500px;
-    margin: 16% 0 0 10%;
+    max-width: 700px;
+    padding: 16% 0 6% 10%;
   }
 
   &-heading {
     text-transform: uppercase;
-    font-size: 3em;
+    font-size: 3.2rem;
     margin: 0 0 10%;
-    font-weight: 700;
+    color: #000;
     span {
+      font-weight: 700;
       color: map-get($theme-colors, purple);
     }
   }
 
   &-text {
     margin: 0 0 15%;
-    width: 80%;
+    width: 70%;
     line-height: 160%;
   }
 
   .btn {
+    font-family: Helvetica, Arial;
+    text-transform: uppercase;
     letter-spacing: 5px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 0 56px;
+    height: 93px;
+    //width: 235px;
   }
 }
