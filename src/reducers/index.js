@@ -8,10 +8,10 @@ import {
 const initialState = {
   firstScreen: process.env.NODE_ENV !== 'development',
   successMessage: null,
-  step: 3,
+  step: 1,
   data: {
-    name: "test",
-    product: "M",
+    // name: "",
+    // product: "",
     items: {
       // fixme: redux-form remove items object
       "_": null
