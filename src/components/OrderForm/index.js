@@ -1,158 +1,187 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from "classnames"
-import {Button, Fade, Form} from 'reactstrap';
+import {Button, Form, Modal, ModalBody} from 'reactstrap';
+import {connect} from "react-redux";
+import {reduxForm, SubmissionError} from "redux-form";
+
+import {nextStep, prevStep} from "../../actions";
+
+import StepOne from "./StepOne";
+import StepTwo from "./StepTwo";
+import StepThree from "./StepThree";
+import StepFour from "./StepFour";
+
+// import asyncComponent from "../AsyncComponent";
+// const StepThree = asyncComponent(() => import("./StepThree"));
+// const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+const form = 'order';
+
+const steps = [
+  {
+    title: "Name the project",
+    component: StepOne
+  },
+  {
+    title: "Chose a product",
+    component: StepTwo
+  },
+  {
+    title: "Upload your layouts",
+    component: StepThree
+  },
+  {
+    title: "Pickup inner colors",
+    component: StepFour
+  }
+];
 
 class OrderForm extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      step: this.props.step || 1,
-      data: this.props.data || {},
-      errors: [],
-    };
-  }
-
-  componentDidMount() {
-    document.addEventListener("keydown", this.handleKeydown, false);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleKeydown, false);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
+    const {step, handleSubmit, submitting, asyncValidating, error, clearSubmitErrors} = this.props;
+
+    let item = steps[step - 1];
+    if (!item) {
+      item = steps[0];
+    }
+
+    item.props = this.props;
+
     return (
-      <div className="OrderForm">
-        <Form onSubmit={this.handleSubmit}>
-          <div className="OrderForm-header">
-            <span>{this.state.step}</span>
-            {this.renderTitle()}
+      <Form className="OrderForm" onSubmit={handleSubmit(this.handleSubmit)}>
+        <div className="OrderForm-header">
+          <span>{step}</span>
+          {item.title}
+        </div>
+        <div className="OrderForm-body">
+          <div className="step" id={"step" + step}>
+            {<item.component {...item.props}/>}
           </div>
-          <div className="OrderForm-body">
-            {this.renderSteps()}
-          </div>
-          <div className="OrderForm-footer">
-            {this.state.step > 1 && (
-              <Button color="outline-secondary" size="lg" onClick={this.prev}>Prev Step</Button>
-            )}
-            {/*{this.state.step < this.props.children.length ? (*/}
-              <Button color="outline-secondary" size="lg" onClick={this.next}>Next Step</Button>
-            {/*
-            ) : (
-              <Button color="primary" size="lg" onClick={this.next}>Place Order</Button>
-            )}
-            */}
-          </div>
-        </Form>
-      </div>
+        </div>
+        <div className="OrderForm-footer">
+          {step > 1 && (
+            <Button type="button" size="lg" color="outline-secondary" onClick={this.handlePrevStep}
+                    disabled={submitting || asyncValidating}>
+              Prev Step
+            </Button>
+          )}
+          <Button type="submit" size="lg" color="outline-secondary"
+                  disabled={submitting || asyncValidating}>
+            Next Step
+          </Button>
+        </div>
+        {error && (
+          <Modal isOpen={true} toggle={clearSubmitErrors}>
+            <ModalBody className="alert alert-danger m-0">{error}</ModalBody>
+          </Modal>
+        )}
+      </Form>
     );
   }
 
-  renderTitle() {
-    return this.currentStep().props.title;
-  }
-
-  renderSteps() {
-    return React.Children.map(this.props.children, (child, i) => {
-      const step = i + 1;
-      const active = this.state.step === step;
-      const classes = {step: true};
-      classes["step-" + step] = true;
-      return (
-        <Fade in={active}
-              id={"step" + step}
-              className={classNames(classes)}
-              mountOnEnter={true}
-              unmountOnExit={true}
-              timeout={{enter: 150, exit: 0}}
-        >
-          {React.cloneElement(child, {
-            ref: active ? "active" : null,
-            getStore: () => {
-              return this.state.data
-            },
-            updateStore: (data) => {
-              this.setState({
-                data: {...this.state.data, ...data}
-              });
-            }
-          })}
-        </Fade>
-      );
-    });
-  }
-
-  currentStep() {
-    return this.props.children[this.state.step - 1];
-  }
-
-  validate() {
-    let s = this.refs.active;
-    if (s !== undefined && s.validate !== undefined) {
-      return s.validate();
-    }
-    return true;
-  }
-
   /**
    * @param {Event} e
    */
-  prev = e => {
-    let s = this.state.step - 1;
-    if (s > 0) {
-      this.setState({step: s})
+  handlePrevStep = e => {
+    if (this.props.step > 0) {
+      this.props.prevStep();
     }
   };
 
   /**
-   * @param {Event} e
+   * @param data
    */
-  next = e => {
-    if (this.validate()) {
-      let s = this.state.step + 1;
-      if (s < this.props.children.length + 1) {
-        this.setState({step: s})
-      } else {
-        if (this.props.onSubmit !== undefined) {
-          this.props.onSubmit(this.state.data);
-        }
+  handleSubmit = data => {
+    this.validate(data);
+    if (this.props.step < steps.length) {
+      this.props.nextStep();
+    } else {
+      this.props.onSubmit(data);
+    }
+  };
+
+  /**
+   * @param data
+   */
+  validate = data => {
+
+    let errors = {};
+    let {step} = this.props;
+
+    // errors._error = "test";
+
+    if (step === 1) {
+      if (!data.name) {
+        errors.name = 'Please enter the name of your project.';
       }
     }
-  };
 
-  /**
-   * @param {Event} e
-   */
-  handleKeydown = e => {
-    switch (e.keyCode) {
-      case 37: // arrow left
-        this.prev(e);
-        break;
-      case 32: // space
-      case 39: // arrow right
-        this.next(e);
-        break;
-      default:
+    if (step === 2) {
+      if (!data.product) {
+        errors.product = 'Please choose a product.';
+      }
+    }
+
+    if (step === 3) {
+      if (!data.frontOuter) {
+        errors.frontOuter = 'Please select a layout.';
+      }
+      if (data.frontInner == null) {
+        errors.frontInner = 'Please make your choice from above.';
+      }
+      if (data.backInner == null) {
+        errors.backInner = 'Please make your choice from above.';
+      }
+      if (data.backOuter == null) {
+        errors.backOuter = 'Please make your choice from above.';
+      }
+    }
+
+    if (step === 4) {
+      if (Object.keys(data.items).length  === 0) {
+        // errors.items = {
+        //   "009": "test"
+        // };
+        errors._error = 'Please choose a product.';
+      }
+    }
+
+    if (Object.keys(errors).length > 0) {
+      throw new SubmissionError(errors);
     }
   };
 
-  /**
-   * @param {Event} e
-   * @returns {boolean}
-   */
-  handleSubmit = e => {
-    e.preventDefault();
-    this.next(e);
-    return false;
-  }
 }
 
 OrderForm.propTypes = {
-  children: PropTypes.node,
   onSubmit: PropTypes.func.isRequired,
-  data: PropTypes.object
+  step: PropTypes.number,
 };
 
-export default OrderForm;
+OrderForm = reduxForm({form})(OrderForm);
+
+OrderForm = connect(
+  state => {
+    return {
+      initialValues: state.app.data,
+      step: state.app.step,
+    }
+  },
+  dispatch => {
+    return {
+      prevStep: () => {
+        dispatch(prevStep())
+      },
+      nextStep: () => {
+        dispatch(nextStep())
+      },
+    }
+  }
+)(OrderForm);
+
+export default OrderForm

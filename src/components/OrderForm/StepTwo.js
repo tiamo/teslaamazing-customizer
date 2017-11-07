@@ -1,101 +1,68 @@
-import React, {Component} from 'react';
-import {Col, FormGroup, Input, Label, Row} from "reactstrap";
+import React from 'react';
+import {Field} from "redux-form";
+import {Col, FormGroup, Label, Row, Input} from "reactstrap";
 import {PRODUCT_SIZE_UNIT, PRODUCTS_MAP} from "../../constants";
 
-export default class StepTwo extends Component {
-
-  constructor(props) {
-    super(props);
-    let store = this.props.getStore();
-    let value = store.product || '';
-    this.state = {
-      value: value,
-      valid: value !== '' ? true : null,
-    };
-  }
-
-  validate() {
-    if (this.state.value === '') {
-      this.setState({
-        valid: false,
-      });
-    }
-    return this.state.valid;
-  };
-
-  handleChange = e => {
-    this.setState({
-      valid: e.target.value !== '',
-      value: e.target.value
-    });
-    this.props.updateStore({
-      product: e.target.value,
-      items: {}
-    });
-  };
-
-  // render the steps as stepsNavigation
-  renderProducts(products) {
-    return products.map((product) => (
-      <td key={product.name}
-          className={"product product--" + product.name.toLowerCase()}>
-        <FormGroup className={this.state.value === product.name ? "checked" : null}>
-          <Label tabIndex="99">
-            <div className="product-box"></div>
-            <div className="product-name">{product.name}</div>
-            <div className="product-desc">
-              {product.size[0] + " x " + product.size[1] + " " + PRODUCT_SIZE_UNIT}
-            </div>
-            <div className="custom-control custom-radio">
-              <Input type="radio"
-                     className="custom-control-input"
-                     value={product.name}
-                     checked={this.state.value === product.name}
-                     valid={this.state.valid}
-                     onChange={this.handleChange}/>
-              <span className="custom-control-indicator"></span>
-            </div>
-          </Label>
-        </FormGroup>
-      </td>
-    ));
-  }
-
-  render() {
-    return (
-      <div>
-        <Row>
-          <Col lg="6" xs="12">
-            <h2>Magnetic Notes</h2>
-            <table className="table">
-              <tbody>
-              <tr>
-                {this.renderProducts([
-                  PRODUCTS_MAP.S,
-                  PRODUCTS_MAP.M,
-                  PRODUCTS_MAP.L
-                ])}
-              </tr>
-              </tbody>
-            </table>
-          </Col>
-          <Col lg="6" xs="12">
-            <h2>Magnetic Pad</h2>
-            <table className="table">
-              <tbody>
-              <tr>
-                {this.renderProducts([
-                  PRODUCTS_MAP.A5,
-                  PRODUCTS_MAP.A4,
-                  PRODUCTS_MAP.A3
-                ])}
-              </tr>
-              </tbody>
-            </table>
-          </Col>
-        </Row>
+const renderField = ({input, label, size, meta: {error}}) => (
+  <FormGroup className={input.value === label ? "checked" : null}>
+    <Label tabIndex="99">
+      <div className="product-box"/>
+      <div className="product-name">{label}</div>
+      <div className="product-desc">
+        {size[0] + " x " + size[1] + " " + PRODUCT_SIZE_UNIT}
       </div>
-    );
-  }
+      <div className="custom-control custom-radio">
+        <Input type="radio"
+               className="custom-control-input"
+               {...input}
+               value={label}
+               valid={error ? false : null}
+        />
+        <span className="custom-control-indicator"/>
+      </div>
+    </Label>
+  </FormGroup>
+);
 
-}
+export default () => (
+  <div>
+    <Row>
+      <Col lg="6" xs="12">
+        <h2>Magnetic Notes</h2>
+        <table className="table">
+          <tbody>
+          <tr>
+            {[PRODUCTS_MAP.S, PRODUCTS_MAP.M, PRODUCTS_MAP.L].map((product, key) => (
+              <td key={key} className={"product product--" + product.name.toLowerCase()}>
+                <Field name="product"
+                       label={product.name}
+                       size={product.size}
+                       component={renderField}
+                />
+              </td>
+            ))}
+          </tr>
+          </tbody>
+        </table>
+      </Col>
+      <Col lg="6" xs="12">
+        <h2>Magnetic Pad</h2>
+        <table className="table">
+          <tbody>
+          <tr>
+            {[PRODUCTS_MAP.A5, PRODUCTS_MAP.A4, PRODUCTS_MAP.A3].map((product, key) => (
+              <td key={key} className={"product product--" + product.name.toLowerCase()}>
+                <Field name="product"
+                       label={product.name}
+                       size={product.size}
+                       component={renderField}
+                />
+              </td>
+            ))}
+          </tr>
+          </tbody>
+        </table>
+      </Col>
+    </Row>
+  </div>
+);

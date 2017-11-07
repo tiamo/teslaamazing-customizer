@@ -1,26 +1,33 @@
 import React, {Component} from 'react';
 import {Col, FormFeedback, FormGroup, Row} from "reactstrap";
-import {TECHNICAL_REQUIREMENTS_URL} from "../../constants";
+import {
+  PDF_BORDER_SIZE,
+  PRODUCT_SIZE_FACTOR,
+  PRODUCT_SIZE_UNIT,
+  PRODUCTS_MAP,
+  TECHNICAL_REQUIREMENTS_URL
+} from "../../constants";
 import Dropzone from "react-dropzone";
 import Previewer from "../Previewer/index";
+import {Field, stopSubmit} from "redux-form";
+import formValues from "redux-form/es/formValues";
+import connect from "react-redux/es/connect/connect";
+import {setPreview} from "../../actions";
 
-export default class StepThree extends Component {
+const pdfjs = require('pdfjs-dist');
+// require('pdfjs-dist/web/compatibility');
+// pdfjs.PDFJS.workerSrc = 'pdf.worker.js';
+
+class StepThree extends Component {
 
   constructor(props) {
     super(props);
-    this.store = this.props.getStore();
     this.state = {
       isDragging: false,
       highlightPreview: null,
-      frontOuter: this.store.frontOuter,
-      frontInner: this.store.frontInner,
-      backInner: this.store.backInner,
-      backOuter: this.store.backOuter,
-      errors: {
-        // frontOuter: "test"
-      }
     };
-    this.t = 0;
+    this.hlTimer = 0;
+    this.renderTask = null;
   }
 
   componentDidMount() {
@@ -33,24 +40,8 @@ export default class StepThree extends Component {
     document.removeEventListener('dragleave', this.handleDocumentDrag);
   }
 
-  validate() {
-    let errors = this.state.errors;
-    Object.keys(this.props.sections).forEach((i) => {
-      let file = this.state[i];
-      if (file === null) {
-        if (i === "frontOuter") {
-          errors[i] = 'Please select a layout.';
-        } else {
-          errors[i] = 'Please make your choice from above.';
-        }
-      }
-    });
-    this.setState({errors});
-    return Object.keys(errors).length === 0;
-  }
-
   /**
-   * @param e
+   * @param {Event} e
    */
   handleDocumentDrag = e => {
     this.setState({
@@ -58,132 +49,202 @@ export default class StepThree extends Component {
     });
   };
 
-  handleSelect = (type, file) => {
-    let state = {};
-    state[type] = file;
-    this.props.updateStore(state);
-    this.setState({...state});
-  };
-
-  handleDelete = (type) => {
-    let state = {};
-    state[type] = null;
-    this.setState(state);
-    this.props.updateStore(state);
-  };
-
   animatePreviewer = highlightPreview => {
-    clearTimeout(this.t);
-    this.t = setTimeout(() => {
+    clearTimeout(this.hlTimer);
+    this.hlTimer = setTimeout(() => {
       this.setState({highlightPreview})
     }, 100);
   };
 
-  renderSections(items) {
-    return Object.keys(items).map((i) => {
-      let item = items[i];
-      let file = this.state[i];
-      let error = this.state.errors[i];
-      return (
-        <FormGroup key={i} className={"item " + (error ? "is-invalid" : "")}>
-          <div className="item-heading">{item.title}</div>
-          <div className="item-body">
-            {file ? (
-              <div className="item-file">
-                <span
-                  onMouseEnter={() => {
-                    return this.animatePreviewer(i);
-                  }}
-                  onMouseLeave={() => {
-                    return this.animatePreviewer(null);
-                  }}>
-                    {file.name}
-                  </span>
+  validateField = (value, allValues, props, name) => {
 
-                <span className="icon-success icon-circle-down"/>
+    // console.log("VALIDATE", name, value);
 
-                <button type="button" className="btn btn-link"
+    if (value) {
+
+      const {startAsyncValidation, stopAsyncValidation} = props;
+
+      // props.dispatch(props.autofill(name, null));
+      // console.log(props);
+
+      startAsyncValidation();
+
+      const product = PRODUCTS_MAP[allValues.product];
+
+      pdfjs.getDocument({url: URL.createObjectURL(value)}).then((pdf) => {
+
+        pdf.getPage(1).then((page) => {
+
+          let viewport = page.getViewport(1);
+          let validSize = [
+            product.size[0] + PDF_BORDER_SIZE,
+            product.size[1] + PDF_BORDER_SIZE,
+          ], pdfSize = [
+            Math.floor(viewport.width * PRODUCT_SIZE_FACTOR),
+            Math.floor(viewport.height * PRODUCT_SIZE_FACTOR)
+          ];
+
+          if (pdfSize[0] !== validSize[0] || pdfSize[1] !== validSize[1]) {
+            throw 'Incorrect pdf size. Your size is ' + pdfSize.join('x') + ' ' + PRODUCT_SIZE_UNIT +
+            ', expected size is ' + validSize.join('x') + ' ' + PRODUCT_SIZE_UNIT + '.';
+          } else {
+            let canvas = this.refs["canvas." + name];
+            if (canvas) {
+              canvas.width = viewport.width * 2;
+              canvas.height = viewport.height * 2;
+              page.render({
+                canvasContext: canvas.getContext('2d'),
+                viewport: page.getViewport(canvas.width / page.getViewport(1).width)
+              }).then(() => {
+                this.props.setPreview(name, canvas.toDataURL('image/jpeg'));
+              });
+              // props.dispatch(props.autofill(name, value));
+            }
+          }
+
+          stopAsyncValidation();
+
+        }).catch((error) => {
+          stopAsyncValidation({[name]: error});
+        });
+
+      }).catch((error) => {
+        stopAsyncValidation({[name]: error});
+      });
+    }
+
+  };
+
+  renderField = ({input: {name, value, onChange}, meta: {error}, label, defaultButton}) => {
+    return (
+      <FormGroup className={"item " + (error ? "is-invalid" : "")}>
+        <div className="item-heading">{label}</div>
+        <div className="item-body">
+          {value ? (
+            <div className="item-file">
+              <span
+                onMouseEnter={() => {
+                  return this.animatePreviewer(name);
+                }}
+                onMouseLeave={() => {
+                  return this.animatePreviewer(null);
+                }}>
+                  {value.name}
+              </span>
+              <span className="icon-success icon-valid"/>
+              <button type="button" className="btn btn-link"
+                      onClick={() => {
+                        if (window.confirm('Are you sure?')) {
+                          onChange(null);
+                          this.props.setPreview(name, null)
+                        }
+                      }}>
+                Delete
+              </button>
+            </div>
+          ) : (
+            <div className="item-select-file">
+              <Dropzone
+                className="btn btn-md btn-outline-secondary action-upload"
+                acceptClassName="btn-outline-success"
+                rejectClassName="btn-outline-danger"
+                multiple={false}
+                accept={this.props.accept}
+                onDrop={(files) => {
+                  onChange(files[0]);
+                }}
+                onMouseEnter={() => {
+                  return this.animatePreviewer(name);
+                }}
+                onMouseLeave={() => {
+                  return this.animatePreviewer(null);
+                }}
+              >
+                Select layout
+              </Dropzone>
+              {defaultButton && (
+                <button type="button"
+                        className={"btn btn-md " + (value === false ? "btn-outline-success" : "btn-outline-secondary")}
                         onClick={() => {
-                          if (window.confirm('Are you sure?')) {
-                            this.handleDelete(i)
-                          }
-                        }}>
-                  Delete
-                </button>
-              </div>
-            ) : (
-              <div className="item-select-file">
-                <Dropzone
-                  className="btn btn-md btn-outline-secondary action-upload"
-                  acceptClassName="btn-outline-success"
-                  rejectClassName="btn-outline-danger"
-                  multiple={false}
-                  accept={this.props.accept}
-                  onDrop={(files) => {
-                    this.handleSelect(i, files[0])
-                  }}
-                  onMouseEnter={() => {
-                    return this.animatePreviewer(i);
-                  }}
-                  onMouseLeave={() => {
-                    return this.animatePreviewer(null);
-                  }}
+                          onChange(false);
+                          this.props.setPreview(name, null)
+                        }}
                 >
-                  Select layout
-                </Dropzone>
-                {item.defaultButton !== undefined && (
-                  <button type="button"
-                          className={"btn btn-md " + (file === false ? "btn-outline-success" : "btn-outline-secondary")}
-                          onClick={() => {
-                            this.handleSelect(i, false)
-                          }}
-                  >
-                    {item.defaultButton}
-                  </button>
-                )}
-                {file === false && (
-                  <span className="icon-success icon-circle-down"/>
-                )}
-              </div>
-            )}
-
-          </div>
-
-          <FormFeedback>{error}</FormFeedback>
-        </FormGroup>
-      );
-
-    });
-  }
+                  {defaultButton}
+                </button>
+              )}
+              {value === false && (
+                <span className="icon-success icon-valid"/>
+              )}
+            </div>
+          )}
+        </div>
+        <FormFeedback>{error}</FormFeedback>
+      </FormGroup>
+    );
+  };
 
   render() {
+
+    const sections = [
+      {
+        name: "frontOuter",
+        label: "01 Front Outer",
+      },
+      {
+        name: "frontInner",
+        label: "02 Front Inner",
+        defaultButton: "Leave Empty",
+      },
+      {
+        name: "backInner",
+        label: "03 Back Inner",
+        defaultButton: "Leave Empty",
+      },
+      {
+        name: "backOuter",
+        label: "04 Back Outer",
+        defaultButton: "Leave Standard",
+      },
+    ];
+
+    console.log(this.props);
+
     return (
-      <div className={this.state.isDragging ? " is-dragging" : ""}>
-        <Row>
-          <Col lg="6" xs="12">
-            <p>
-              You mockups must be strictly in PDF format.
-              Please, make sure that your files comply with all the
-              {" "}
-              <a target="_blank" rel="noopener noreferrer" href={TECHNICAL_REQUIREMENTS_URL}>
-                technical requirements
-              </a>
-            </p>
-            <hr/>
-            {this.renderSections(this.props.sections)}
-          </Col>
-          <Col lg="6" xs="12">
-            <Previewer {...{
-              product: this.store.product,
-              highlight: this.state.highlightPreview,
-              frontOuter: this.state.frontOuter,
-              frontInner: this.state.frontInner,
-              backInner: this.state.backInner,
-              backOuter: this.state.backOuter,
-            }} />
-          </Col>
-        </Row>
-      </div>
+      <Row className={this.state.isDragging ? " is-dragging" : ""}>
+        <Col lg="6" xs="12">
+          <p>
+            You mockups must be strictly in PDF format.
+            Please, make sure that your files comply with all the
+            {" "}
+            <a target="_blank" rel="noopener noreferrer" href={TECHNICAL_REQUIREMENTS_URL}>
+              technical requirements
+            </a>
+          </p>
+          <hr/>
+          {sections.map((section, key) => (
+            <Field key={key}
+                   validate={this.validateField}
+                   component={this.renderField}
+                   {...section}
+            />
+          ))}
+        </Col>
+        <Col lg="6" xs="12">
+
+          <Previewer {...{
+            product: this.props.product,
+            highlight: this.state.highlightPreview,
+          }} />
+
+          {/* TODO: Optimize */}
+          <canvas ref="canvas.frontOuter" style={{display: "none"}}/>
+          <canvas ref="canvas.frontInner" style={{display: "none"}}/>
+          <canvas ref="canvas.backInner" style={{display: "none"}}/>
+          <canvas ref="canvas.backOuter" style={{display: "none"}}/>
+
+        </Col>
+      </Row>
     );
   }
 
@@ -191,22 +252,22 @@ export default class StepThree extends Component {
 
 StepThree.defaultProps = {
   accept: 'application/pdf',
-  sections: {
-    frontOuter: {
-      title: "01 Front Outer",
-    },
-    frontInner: {
-      title: "02 Front Inner",
-      defaultButton: "Leave Empty",
-    },
-    backInner: {
-      title: "03 Back Inner",
-      defaultButton: "Leave Empty",
-    },
-    backOuter: {
-      title: "04 Back Outer",
-      defaultButton: "Leave Standard",
-    },
-  }
+  product: ""
 };
 
+StepThree = formValues('product')(StepThree);
+
+StepThree = connect(
+  state => {
+    return state.app.preview
+  },
+  dispatch => {
+    return {
+      setPreview: (name, value) => {
+        dispatch(setPreview(name, value))
+      },
+    }
+  }
+)(StepThree);
+
+export default StepThree;

@@ -1,5 +1,4 @@
-
-@mixin font-face($family,$src,$style: normal,$weight: normal) {
+@mixin webfont($family, $src, $weight: normal, $style: normal) {
   @font-face {
     font-family: $family;
     src: url('#{$src}.eot'); // IE9 compat
@@ -7,8 +6,16 @@
     url('#{$src}.woff') format('woff'), // standards
     url('#{$src}.ttf') format('truetype'), // Safari, Android, iOS
     url('#{$src}.svg##{$family}') format('svg'); // legacy iOS
-
-    font-style: $style;
     font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+@mixin webfonts($family, $attributes...) {
+  @each $attr in $attributes {
+    $src: nth($attr, 1);
+    $weight: nth($attr, 2);
+    $style: nth($attr, 3);
+    @include webfont($family, $src, $weight, $style);
   }
 }

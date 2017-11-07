@@ -22,13 +22,14 @@ $highlight-color: rgba(#f74561, 0.2);
 
     .highlight {
       transition: all 0.3s ease;
-      background: repeating-linear-gradient(
-                      135deg,
-                      lighten($highlight-color, 20),
-                      lighten($highlight-color, 20) 10px,
-                      $highlight-color 10px,
-                      $highlight-color 20px
-      );
+      background: $highlight-color;
+      //background: repeating-linear-gradient(
+      //                135deg,
+      //                lighten($highlight-color, 20),
+      //                lighten($highlight-color, 20) 10px,
+      //                $highlight-color 10px,
+      //                $highlight-color 20px
+      //);
       position: absolute;
       top: 0;
       left: 0;
@@ -81,6 +82,8 @@ $highlight-color: rgba(#f74561, 0.2);
 
       > li {
 
+        background-size: cover;
+
         //&:first-child:after, &:first-child:before, &:last-child:after, &:last-child:before {
         //  background: red; //rgba(#fff, 1);
         //  opacity: 0.6;
@@ -108,7 +111,7 @@ $highlight-color: rgba(#f74561, 0.2);
         z-index: 100;
         > li {
           &:first-child {
-            background: #eee no-repeat center center;
+            background-color: #eee;
             background-size: cover;
             backface-visibility: hidden;
             cursor: default;
@@ -126,7 +129,7 @@ $highlight-color: rgba(#f74561, 0.2);
           }
           &:last-child {
             transform: rotateY(180deg) rotateZ(180deg) translateZ(1px);
-            background: $inner-color;
+            background-color: $inner-color;
             &:before {
               //display:none;
               //box-shadow: 0 0 30px 5px #333;
@@ -154,7 +157,7 @@ $highlight-color: rgba(#f74561, 0.2);
         z-index: -1;
         li {
           &:first-child {
-            background: $inner-color;
+            background-color: $inner-color;
             transform: translateZ(1px);
             &:before {
               //transform: rotateY(90deg) translateZ(158px) translateX(2px);
@@ -218,11 +221,11 @@ $highlight-color: rgba(#f74561, 0.2);
           color: #fff;
           > li {
             &:first-child {
-              @if $name == transparent {
-                background: url(./assets/transparent.gif) repeat !important;
-              } @else {
+              //@if $name == transparent {
+              //  background: url(./assets/transparent.gif) repeat !important;
+              //} @else {
                 background-color: $color;
-              }
+              //}
             }
           }
         }

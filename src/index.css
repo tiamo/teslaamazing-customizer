@@ -2,29 +2,36 @@
   font-family: "icomoon";
   src: url("./assets/fonts/icomoon.eot");
   src: url("./assets/fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/icomoon.woff") format("woff"), url("./assets/fonts/icomoon.ttf") format("truetype"), url("./assets/fonts/icomoon.svg#icomoon") format("svg");
-  font-style: normal;
-  font-weight: normal; }
+  font-weight: normal;
+  font-style: normal; }
 
 @font-face {
-  font-family: "Avenir-Book";
+  font-family: "Avenir Book";
   src: url("./assets/fonts/Avenir-Book.eot");
-  src: url("./assets/fonts/Avenir-Book.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/Avenir-Book.woff") format("woff"), url("./assets/fonts/Avenir-Book.ttf") format("truetype"), url("./assets/fonts/Avenir-Book.svg#Avenir-Book") format("svg");
-  font-style: normal;
-  font-weight: normal; }
-
-@font-face {
-  font-family: "Helvetica Neue";
-  src: url("./assets/fonts/HelveticaNeue.eot");
-  src: url("./assets/fonts/HelveticaNeue.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/HelveticaNeue.woff") format("woff"), url("./assets/fonts/HelveticaNeue.ttf") format("truetype"), url("./assets/fonts/HelveticaNeue.svg#Helvetica Neue") format("svg");
-  font-style: normal;
-  font-weight: normal; }
+  src: url("./assets/fonts/Avenir-Book.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/Avenir-Book.woff") format("woff"), url("./assets/fonts/Avenir-Book.ttf") format("truetype"), url("./assets/fonts/Avenir-Book.svg#Avenir Book") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 
 @font-face {
   font-family: "Helvetica Neue";
   src: url("./assets/fonts/HelveticaNeue-UltraLight.eot");
   src: url("./assets/fonts/HelveticaNeue-UltraLight.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/HelveticaNeue-UltraLight.woff") format("woff"), url("./assets/fonts/HelveticaNeue-UltraLight.ttf") format("truetype"), url("./assets/fonts/HelveticaNeue-UltraLight.svg#Helvetica Neue") format("svg");
-  font-style: normal;
-  font-weight: 200; }
+  font-weight: 100;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./assets/fonts/HelveticaNeue-Thin.eot");
+  src: url("./assets/fonts/HelveticaNeue-Thin.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/HelveticaNeue-Thin.woff") format("woff"), url("./assets/fonts/HelveticaNeue-Thin.ttf") format("truetype"), url("./assets/fonts/HelveticaNeue-Thin.svg#Helvetica Neue") format("svg");
+  font-weight: 200;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./assets/fonts/HelveticaNeue.eot");
+  src: url("./assets/fonts/HelveticaNeue.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/HelveticaNeue.woff") format("woff"), url("./assets/fonts/HelveticaNeue.ttf") format("truetype"), url("./assets/fonts/HelveticaNeue.svg#Helvetica Neue") format("svg");
+  font-weight: 400;
+  font-style: normal; }
 
 /*!
  * Bootstrap v4.0.0-beta (https://getbootstrap.com)
@@ -7093,8 +7100,11 @@ a.text-sunshine:focus, a.text-sunshine:hover {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-.icon-circle-down:before {
-  content: "\ea43"; }
+.icon-valid:before {
+  content: "\e900"; }
+
+.icon-close:before {
+  content: "\e901"; }
 
 .btn {
   cursor: pointer; }
@@ -7126,7 +7136,7 @@ a.text-sunshine:focus, a.text-sunshine:hover {
 .FirstScreen {
   background: url(./assets/bg.jpg) no-repeat center center;
   background-size: cover;
-  position: absolute;
+  position: fixed;
   width: 100%;
   min-height: 100%;
   top: 0;
@@ -7150,11 +7160,12 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     width: 70%;
     line-height: 160%; }
   .FirstScreen .btn {
-    font-family: Helvetica, Arial;
+    font-family: Helvetica, Arial, serif;
     text-transform: uppercase;
-    letter-spacing: 5px;
-    padding: 0 56px;
-    height: 93px; }
+    letter-spacing: 5px; }
+    .FirstScreen .btn-lg, .FirstScreen .btn-group-lg > .btn {
+      padding: 0 46px;
+      height: 83px; }
 
 .Previewer {
   position: relative; }
@@ -7167,7 +7178,7 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     transition: all 0.8s ease; }
     .Previewer .book .highlight {
       transition: all 0.3s ease;
-      background: repeating-linear-gradient(135deg, rgba(251, 167, 180, 0.2), rgba(251, 167, 180, 0.2) 10px, rgba(247, 69, 97, 0.2) 10px, rgba(247, 69, 97, 0.2) 20px);
+      background: rgba(247, 69, 97, 0.2);
       position: absolute;
       top: 0;
       left: 0;
@@ -7195,18 +7206,20 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     .Previewer .book .cover {
       transition: all 0.3s ease;
       transform-origin: 100% 0; }
+      .Previewer .book .cover > li {
+        background-size: cover; }
       .Previewer .book .cover.front {
         transform: rotateX(34deg) translateZ(1px);
         z-index: 100; }
         .Previewer .book .cover.front > li:first-child {
-          background: #eee no-repeat center center;
+          background-color: #eee;
           background-size: cover;
           backface-visibility: hidden;
           cursor: default;
           user-select: none; }
         .Previewer .book .cover.front > li:last-child {
           transform: rotateY(180deg) rotateZ(180deg) translateZ(1px);
-          background: #f9f9f9; }
+          background-color: #f9f9f9; }
         .Previewer .book .cover.front svg {
           position: relative;
           width: 100%;
@@ -7217,7 +7230,7 @@ a.text-sunshine:focus, a.text-sunshine:hover {
         box-shadow: 0 5px 10px 0 #aaa;
         z-index: -1; }
         .Previewer .book .cover.back li:first-child {
-          background: #f9f9f9;
+          background-color: #f9f9f9;
           transform: translateZ(1px); }
           .Previewer .book .cover.back li:first-child:after {
             transform: translateX(399px); }
@@ -7318,7 +7331,7 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     .Previewer .book.color-transparent .front {
       color: #fff; }
       .Previewer .book.color-transparent .front > li:first-child {
-        background: url(./assets/transparent.gif) repeat !important; }
+        background-color: #eee; }
     .Previewer .book.color-transparent .page > li {
       background: transparent; }
     .Previewer .book.color-aqua .front {
@@ -7470,7 +7483,7 @@ a.text-sunshine:focus, a.text-sunshine:hover {
   font-size: 1.38rem; }
 
 .OrderForm-header {
-  font-weight: 200;
+  font-weight: 100;
   font-size: 3.95rem;
   line-height: 4.2rem;
   color: #656565;
@@ -7484,7 +7497,8 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     height: 72px;
     line-height: 72px;
     text-align: center;
-    margin: 0 24px 0 0; }
+    margin: 0 24px 0 0;
+    font-weight: 200; }
 
 .OrderForm-body {
   padding: 46px 0; }
@@ -7496,11 +7510,6 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     padding: 12px 30px;
     border-radius: 60px;
     font-weight: 300; }
-
-.OrderForm .step {
-  display: none; }
-  .OrderForm .step.show {
-    display: block; }
 
 #step1 {
   max-width: 500px;
@@ -7519,14 +7528,15 @@ a.text-sunshine:focus, a.text-sunshine:hover {
 
 #step2 h2 {
   font-size: 1.65rem;
-  font-weight: 300;
+  font-weight: 200;
   margin-top: 1.5rem; }
 
 #step2 input {
   margin: 0 0 0 -0.25rem; }
 
 #step2 label {
-  display: block; }
+  display: block;
+  outline: none; }
 
 #step2 .form-group {
   margin: 0; }
@@ -7585,22 +7595,22 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       height: 196px; }
   #step2 .product .custom-control-indicator {
     background: #F8F8F8;
-    box-shadow: 0 0 0 1px #fff, 0 0 0 3px #868686; }
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #868686; }
   #step2 .product .was-validated .custom-control-input:invalid ~ .custom-control-indicator, #step2 .product .custom-control-input.is-invalid ~ .custom-control-indicator {
     background-color: rgba(220, 53, 69, 0.25);
-    box-shadow: 0 0 0 1px #fff, 0 0 0 3px #dc3545; }
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #dc3545; }
   #step2 .product .form-group.checked .product-box {
     background: #CDF0C2; }
   #step2 .product .form-group.checked input {
     border-color: #CDF0C2; }
   #step2 .product .form-group.checked .custom-control-indicator {
     background: #CDF0C2;
-    box-shadow: 0 0 0 1px #fff, 0 0 0 3px #868686; }
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #868686; }
 
 #step3 .item {
   margin: 0 0 24px; }
   #step3 .item .btn-md {
-    padding: 17px 34px;
+    padding: 17px 0;
     width: 180px; }
   #step3 .item-heading {
     margin: 0 0 7px;
@@ -7720,7 +7730,7 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       top: -10px;
       left: 25%;
       width: 50%; }
-    #step4 .products .card .close {
+    #step4 .products .card .icon-close {
       transition: all 0.8s ease;
       font-weight: 300;
       opacity: 1;
@@ -7728,13 +7738,13 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       position: absolute;
       top: -0.75rem;
       right: -0.75rem;
-      width: 1.55rem;
-      height: 1.55rem;
-      padding: 0;
-      border: 1px solid #E87070;
       color: #E87070;
       border-radius: 100%;
-      font-size: 1rem; }
+      border: 0;
+      padding: 0;
+      font-size: 1.55rem;
+      outline: 0;
+      cursor: pointer; }
     #step4 .products .card-img {
       height: 100px; }
     #step4 .products .card-text {

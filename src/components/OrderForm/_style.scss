@@ -11,7 +11,7 @@
   }
 
   &-header {
-    font-weight: 200;
+    font-weight: 100;
     font-size: 3.95rem;
     line-height: 4.2rem;
     color: #656565;
@@ -27,6 +27,7 @@
       line-height: 72px;
       text-align: center;
       margin: 0 24px 0 0;
+      font-weight: 200;
       //position: absolute;
       //left: -100px;
     }
@@ -48,11 +49,11 @@
   }
 
   .step {
-    display: none;
-
-    &.show {
-      display: block;
-    }
+    //display: none;
+    //
+    //&.show {
+    //  display: block;
+    //}
   }
 
 }
@@ -82,7 +83,7 @@
 
   h2 {
     font-size: 1.65rem;
-    font-weight: 300;
+    font-weight: 200;
     margin-top: 1.5rem;
   }
 
@@ -92,6 +93,7 @@
 
   label {
     display: block;
+    outline: none;
   }
 
   .form-group {
@@ -186,12 +188,12 @@
     .custom-control-indicator {
       background: #F8F8F8;
       //border: 2px solid #868686;
-      box-shadow: 0 0 0 1px #fff, 0 0 0 3px #868686;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px #868686;
     }
 
     .was-validated .custom-control-input:invalid ~ .custom-control-indicator, .custom-control-input.is-invalid ~ .custom-control-indicator {
       background-color: rgba(220, 53, 69, 0.25);
-      box-shadow: 0 0 0 1px #fff, 0 0 0 3px $red;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px $red;
     }
 
     .form-group {
@@ -204,7 +206,7 @@
         }
         .custom-control-indicator {
           background: #CDF0C2;
-          box-shadow: 0 0 0 1px #fff, 0 0 0 3px #868686;
+          box-shadow: 0 0 0 2px #fff, 0 0 0 4px #868686;
         }
       }
     }
@@ -216,7 +218,7 @@
   .item {
     margin: 0 0 24px;
     .btn-md {
-      padding: 17px 34px;
+      padding: 17px 0;
       width: 180px;
     }
     &-heading {
@@ -342,7 +344,7 @@
         left: 25%;
         width: 50%;
       }
-      .close {
+      .icon-close {
         transition: all 0.8s ease;
         font-weight: 300;
         opacity: 1;
@@ -350,13 +352,13 @@
         position: absolute;
         top: -0.75rem;
         right: -0.75rem;
-        width: 1.55rem;
-        height: 1.55rem;
-        padding: 0;
-        border: 1px solid #E87070;
         color: #E87070;
         border-radius: 100%;
-        font-size: 1rem;
+        border: 0;
+        padding: 0;
+        font-size: 1.55rem;
+        outline: 0;
+        cursor: pointer;
       }
       &-img {
         height: 100px;

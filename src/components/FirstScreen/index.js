@@ -1,12 +1,11 @@
 import React from 'react';
-// import logo from "../assets/logo-first.svg";
+import CustomMagnetic from "../Svg/CustomMagnetic";
 
 export default ({onClick}) => (
   <div className="FirstScreen">
     <div className="FirstScreen-content">
       <div className="FirstScreen-heading">
-        <span>Custom</span> Magnetic
-        {/*<img src={logo} alt=""/>*/}
+        <CustomMagnetic/>
       </div>
       <div className="FirstScreen-text">
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh

@@ -1,8 +1,15 @@
+@include webfont('icomoon', './assets/fonts/icomoon');
 
-@include font-face('icomoon','./assets/fonts/icomoon');
-@include font-face('Avenir-Book','./assets/fonts/Avenir-Book');
-@include font-face('Helvetica Neue','./assets/fonts/HelveticaNeue');
-@include font-face('Helvetica Neue','./assets/fonts/HelveticaNeue-UltraLight', normal, 200);
+@include webfonts('Avenir Book',
+        './assets/fonts/Avenir-Book' normal normal
+);
+
+@include webfonts('Helvetica Neue',
+        './assets/fonts/HelveticaNeue-UltraLight' 100 normal,
+        './assets/fonts/HelveticaNeue-Thin' 200 normal,
+        //'./assets/fonts/HelveticaNeue-Light' 300 normal,
+        './assets/fonts/HelveticaNeue' 400 normal
+);
 
 // Typography
 $font-family-sans-serif: "Helvetica Neue", Arial, sans-serif;
@@ -18,16 +25,16 @@ $classic-colors: (
         pink: #e391c4,
         violet: #9b4fa7,
         white: #f8f8f8,
-        //transparent: transparent,
+  //transparent: transparent,
         transparent: #eee,
 );
 $pastel-colors: (
-        //aqua: #b0e2e2,
-        //mint: #c2df87,
-        //peachy: #ffbe9e,
-        //pearl: #dac4e5,
-        //spring: #ffb4aa,
-        //sunshine: #f9df8d,
+  //aqua: #b0e2e2,
+  //mint: #c2df87,
+  //peachy: #ffbe9e,
+  //pearl: #dac4e5,
+  //spring: #ffb4aa,
+  //sunshine: #f9df8d,
         aqua: #63d4da,
         mint: #aad879,
         peachy: #fc9d73,
