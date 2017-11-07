@@ -8,6 +8,10 @@ class Previewer extends Component {
 
   static scaleFactor(product) {
     switch (product) {
+      case 'S':
+        return 1.4;
+      case 'M':
+        return 1.2;
       case 'L':
         return 0.8;
       case 'A5':

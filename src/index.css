@@ -7202,14 +7202,14 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       .Previewer .book .cover:before, .Previewer .book .cover:after, .Previewer .book .cover > li:before, .Previewer .book .cover > li:after, .Previewer .book .page:before, .Previewer .book .page:after, .Previewer .book .page > li:before, .Previewer .book .page > li:after {
         content: ""; }
     .Previewer .book .cover > li, .Previewer .book .page > li {
-      box-shadow: inset 0 0 5px rgba(150, 150, 150, 0.1), inset 0 0 1px rgba(150, 150, 150, 0.2); }
+      box-shadow: inset 0 0 5px rgba(150, 150, 150, 0.1), inset 0 0 1px rgba(150, 150, 150, 0.1); }
     .Previewer .book .cover {
       transition: all 0.3s ease;
       transform-origin: 100% 0; }
       .Previewer .book .cover > li {
         background-size: cover; }
       .Previewer .book .cover.front {
-        transform: rotateX(34deg) translateZ(1px);
+        transform: rotateX(48deg) translateZ(1px);
         z-index: 100; }
         .Previewer .book .cover.front > li:first-child {
           background-color: #eee;
@@ -7226,8 +7226,8 @@ a.text-sunshine:focus, a.text-sunshine:hover {
           height: 100%;
           z-index: 100; }
       .Previewer .book .cover.back {
-        transform: rotateX(26deg) translateZ(-1px);
-        box-shadow: 0 5px 10px 0 #aaa;
+        transform: rotateX(40deg) translateZ(0);
+        box-shadow: 0 5px 5px 0 #aaa;
         z-index: -1; }
         .Previewer .book .cover.back li:first-child {
           background-color: #f9f9f9;
@@ -7247,127 +7247,99 @@ a.text-sunshine:focus, a.text-sunshine:hover {
         box-shadow: inset 0px -1px 1px rgba(85, 85, 85, 0.1), inset 0 40px 100px rgba(102, 102, 102, 0.1);
         transition-duration: 0.3s; }
         .Previewer .book .page > li:nth-child(20) {
-          transform: rotateX(40deg); }
+          transform: rotateX(54deg); }
         .Previewer .book .page > li:nth-child(19) {
-          transform: rotateX(39.3deg); }
+          transform: rotateX(53.3deg); }
         .Previewer .book .page > li:nth-child(18) {
-          transform: rotateX(38.6deg); }
+          transform: rotateX(52.6deg); }
         .Previewer .book .page > li:nth-child(17) {
-          transform: rotateX(37.9deg); }
+          transform: rotateX(51.9deg); }
         .Previewer .book .page > li:nth-child(16) {
-          transform: rotateX(37.2deg); }
+          transform: rotateX(51.2deg); }
         .Previewer .book .page > li:nth-child(15) {
-          transform: rotateX(36.5deg); }
+          transform: rotateX(50.5deg); }
         .Previewer .book .page > li:nth-child(14) {
-          transform: rotateX(35.8deg); }
+          transform: rotateX(49.8deg); }
         .Previewer .book .page > li:nth-child(13) {
-          transform: rotateX(35.1deg); }
+          transform: rotateX(49.1deg); }
         .Previewer .book .page > li:nth-child(12) {
-          transform: rotateX(34.4deg); }
+          transform: rotateX(48.4deg); }
         .Previewer .book .page > li:nth-child(11) {
-          transform: rotateX(33.7deg); }
+          transform: rotateX(47.7deg); }
         .Previewer .book .page > li:nth-child(10) {
-          transform: rotateX(33deg); }
+          transform: rotateX(47deg); }
         .Previewer .book .page > li:nth-child(9) {
-          transform: rotateX(32.3deg); }
+          transform: rotateX(46.3deg); }
         .Previewer .book .page > li:nth-child(8) {
-          transform: rotateX(31.6deg); }
+          transform: rotateX(45.6deg); }
         .Previewer .book .page > li:nth-child(7) {
-          transform: rotateX(30.9deg); }
+          transform: rotateX(44.9deg); }
         .Previewer .book .page > li:nth-child(6) {
-          transform: rotateX(30.2deg); }
+          transform: rotateX(44.2deg); }
         .Previewer .book .page > li:nth-child(5) {
-          transform: rotateX(29.5deg); }
+          transform: rotateX(43.5deg); }
         .Previewer .book .page > li:nth-child(4) {
-          transform: rotateX(28.8deg); }
+          transform: rotateX(42.8deg); }
         .Previewer .book .page > li:nth-child(3) {
-          transform: rotateX(28.1deg); }
+          transform: rotateX(42.1deg); }
         .Previewer .book .page > li:nth-child(2) {
-          transform: rotateX(27.4deg); }
+          transform: rotateX(41.4deg); }
         .Previewer .book .page > li:nth-child(1) {
-          transform: rotateX(26.7deg); }
+          transform: rotateX(40.7deg); }
     .Previewer .book.color-yellow .front {
       color: #fff; }
-      .Previewer .book.color-yellow .front > li:first-child {
-        background-color: #eadb3f; }
     .Previewer .book.color-yellow .page > li {
       background: #efe46d; }
     .Previewer .book.color-blue .front {
       color: #fff; }
-      .Previewer .book.color-blue .front > li:first-child {
-        background-color: #1cb0d5; }
     .Previewer .book.color-blue .page > li {
       background: #3ec4e6; }
     .Previewer .book.color-green .front {
       color: #fff; }
-      .Previewer .book.color-green .front > li:first-child {
-        background-color: #74ba32; }
     .Previewer .book.color-green .page > li {
       background: #8ed04f; }
     .Previewer .book.color-orange .front {
       color: #fff; }
-      .Previewer .book.color-orange .front > li:first-child {
-        background-color: #e67924; }
     .Previewer .book.color-orange .page > li {
       background: #eb9552; }
     .Previewer .book.color-pink .front {
       color: #fff; }
-      .Previewer .book.color-pink .front > li:first-child {
-        background-color: #e391c4; }
     .Previewer .book.color-pink .page > li {
       background: #edbada; }
     .Previewer .book.color-violet .front {
       color: #fff; }
-      .Previewer .book.color-violet .front > li:first-child {
-        background-color: #9b4fa7; }
     .Previewer .book.color-violet .page > li {
       background: #b06ebb; }
     .Previewer .book.color-white .front {
       color: #fff; }
-      .Previewer .book.color-white .front > li:first-child {
-        background-color: #f8f8f8; }
     .Previewer .book.color-white .page > li {
       background: white; }
     .Previewer .book.color-transparent .front {
       color: #fff; }
-      .Previewer .book.color-transparent .front > li:first-child {
-        background-color: #eee; }
     .Previewer .book.color-transparent .page > li {
       background: transparent; }
     .Previewer .book.color-aqua .front {
       color: #fff; }
-      .Previewer .book.color-aqua .front > li:first-child {
-        background-color: #63d4da; }
     .Previewer .book.color-aqua .page > li {
       background: #8cdfe4; }
     .Previewer .book.color-mint .front {
       color: #fff; }
-      .Previewer .book.color-mint .front > li:first-child {
-        background-color: #aad879; }
     .Previewer .book.color-mint .page > li {
       background: #c3e3a1; }
     .Previewer .book.color-peachy .front {
       color: #fff; }
-      .Previewer .book.color-peachy .front > li:first-child {
-        background-color: #fc9d73; }
     .Previewer .book.color-peachy .page > li {
       background: #fdc0a5; }
     .Previewer .book.color-pearl .front {
       color: #fff; }
-      .Previewer .book.color-pearl .front > li:first-child {
-        background-color: #caa8d2; }
     .Previewer .book.color-pearl .page > li {
       background: #decae3; }
     .Previewer .book.color-spring .front {
       color: #fff; }
-      .Previewer .book.color-spring .front > li:first-child {
-        background-color: #fc8776; }
     .Previewer .book.color-spring .page > li {
       background: #fdb3a8; }
     .Previewer .book.color-sunshine .front {
       color: #fff; }
-      .Previewer .book.color-sunshine .front > li:first-child {
-        background-color: #fed671; }
     .Previewer .book.color-sunshine .page > li {
       background: #fee5a4; }
     .Previewer .book.highlight-frontOuter {
@@ -7382,45 +7354,45 @@ a.text-sunshine:focus, a.text-sunshine:hover {
         transform: rotateX(155deg);
         z-index: 0; }
       .Previewer .book.highlight-backInner .page li:nth-child(0) {
-        transform: rotateX(126deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(1) {
-        transform: rotateX(127deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(2) {
-        transform: rotateX(128deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(3) {
-        transform: rotateX(129deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(4) {
-        transform: rotateX(130deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(5) {
-        transform: rotateX(131deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(6) {
-        transform: rotateX(132deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(7) {
-        transform: rotateX(133deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(8) {
-        transform: rotateX(134deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(9) {
-        transform: rotateX(135deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(10) {
-        transform: rotateX(136deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(11) {
-        transform: rotateX(137deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(12) {
-        transform: rotateX(138deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(13) {
-        transform: rotateX(139deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(14) {
         transform: rotateX(140deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(15) {
+      .Previewer .book.highlight-backInner .page li:nth-child(1) {
         transform: rotateX(141deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(16) {
+      .Previewer .book.highlight-backInner .page li:nth-child(2) {
         transform: rotateX(142deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(17) {
+      .Previewer .book.highlight-backInner .page li:nth-child(3) {
         transform: rotateX(143deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(18) {
+      .Previewer .book.highlight-backInner .page li:nth-child(4) {
         transform: rotateX(144deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(19) {
+      .Previewer .book.highlight-backInner .page li:nth-child(5) {
         transform: rotateX(145deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(6) {
+        transform: rotateX(146deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(7) {
+        transform: rotateX(147deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(8) {
+        transform: rotateX(148deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(9) {
+        transform: rotateX(149deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(10) {
+        transform: rotateX(150deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(11) {
+        transform: rotateX(151deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(12) {
+        transform: rotateX(152deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(13) {
+        transform: rotateX(153deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(14) {
+        transform: rotateX(154deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(15) {
+        transform: rotateX(155deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(16) {
+        transform: rotateX(156deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(17) {
+        transform: rotateX(157deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(18) {
+        transform: rotateX(158deg); }
+      .Previewer .book.highlight-backInner .page li:nth-child(19) {
+        transform: rotateX(159deg); }
     .Previewer .book.highlight-backOuter {
       transform: rotateZ(180deg) translateY(120%) scale(1.1); }
       .Previewer .book.highlight-backOuter .cover.front {
@@ -7430,45 +7402,45 @@ a.text-sunshine:focus, a.text-sunshine:hover {
         transform: rotateX(130deg);
         z-index: 10; }
       .Previewer .book.highlight-backOuter .page li:nth-child(0) {
-        transform: rotateX(136deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(1) {
-        transform: rotateX(137deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(2) {
-        transform: rotateX(138deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(3) {
-        transform: rotateX(139deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(4) {
-        transform: rotateX(140deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(5) {
-        transform: rotateX(141deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(6) {
-        transform: rotateX(142deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(7) {
-        transform: rotateX(143deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(8) {
-        transform: rotateX(144deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(9) {
-        transform: rotateX(145deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(10) {
-        transform: rotateX(146deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(11) {
-        transform: rotateX(147deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(12) {
-        transform: rotateX(148deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(13) {
-        transform: rotateX(149deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(14) {
         transform: rotateX(150deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(15) {
+      .Previewer .book.highlight-backOuter .page li:nth-child(1) {
         transform: rotateX(151deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(16) {
+      .Previewer .book.highlight-backOuter .page li:nth-child(2) {
         transform: rotateX(152deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(17) {
+      .Previewer .book.highlight-backOuter .page li:nth-child(3) {
         transform: rotateX(153deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(18) {
+      .Previewer .book.highlight-backOuter .page li:nth-child(4) {
         transform: rotateX(154deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(19) {
+      .Previewer .book.highlight-backOuter .page li:nth-child(5) {
         transform: rotateX(155deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(6) {
+        transform: rotateX(156deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(7) {
+        transform: rotateX(157deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(8) {
+        transform: rotateX(158deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(9) {
+        transform: rotateX(159deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(10) {
+        transform: rotateX(160deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(11) {
+        transform: rotateX(161deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(12) {
+        transform: rotateX(162deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(13) {
+        transform: rotateX(163deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(14) {
+        transform: rotateX(164deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(15) {
+        transform: rotateX(165deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(16) {
+        transform: rotateX(166deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(17) {
+        transform: rotateX(167deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(18) {
+        transform: rotateX(168deg); }
+      .Previewer .book.highlight-backOuter .page li:nth-child(19) {
+        transform: rotateX(169deg); }
     .Previewer .book:hover {
       transform: translateY(10px) scale(1); }
       .Previewer .book:hover .cover.front {

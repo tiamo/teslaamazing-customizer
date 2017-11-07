@@ -1,7 +1,7 @@
 $width: 400px;
 $height: 200px;
 $pages-count: 20;
-$initial-deg: 26;
+$initial-deg: 40;
 
 $inner-color: #f9f9f9;
 $border-width: 0;
@@ -61,7 +61,7 @@ $highlight-color: rgba(#f74561, 0.2);
     }
 
     .cover > li, .page > li {
-      box-shadow: inset 0 0 5px rgba(150, 150, 150, 0.1), inset 0 0 1px rgba(150, 150, 150, 0.2);
+      box-shadow: inset 0 0 5px rgba(150, 150, 150, 0.1), inset 0 0 1px rgba(150, 150, 150, 0.1);
     }
 
     // Cover
@@ -152,8 +152,8 @@ $highlight-color: rgba(#f74561, 0.2);
       }
 
       &.back {
-        transform: rotateX($initial-deg + deg) translateZ(-1px);
-        box-shadow: 0 5px 10px 0 #aaa;
+        transform: rotateX($initial-deg + deg) translateZ(0);
+        box-shadow: 0 5px 5px 0 #aaa;
         z-index: -1;
         li {
           &:first-child {
@@ -224,7 +224,7 @@ $highlight-color: rgba(#f74561, 0.2);
               //@if $name == transparent {
               //  background: url(./assets/transparent.gif) repeat !important;
               //} @else {
-                background-color: $color;
+              //  background-color: $color;
               //}
             }
           }

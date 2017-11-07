@@ -1,11 +1,9 @@
 
 export const TECHNICAL_REQUIREMENTS_URL = "https://teslaamazing.com";
-
-export const MAX_QTY = 99999;
-
 export const PRODUCT_SIZE_FACTOR = 0.352778;
 export const PRODUCT_SIZE_UNIT = 'mm';
 export const PDF_BORDER_SIZE = 4;
+export const MAX_QTY = 99999;
 
 export const PRODUCTS_MAP = {
 
