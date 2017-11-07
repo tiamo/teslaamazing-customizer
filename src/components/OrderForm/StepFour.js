@@ -9,12 +9,14 @@ const renderField = ({input, color, meta: {touched, error}, ...props}) => {
   let classes = {};
   classes["color-" + color] = true;
   return (
+    <label>
     <InputGroup className={classNames(classes)} {...props}>
-      <InputGroupAddon>
-        {color === "transparent" && (<span>transparent</span>)}
-      </InputGroupAddon>
-      <Input valid={error ? false : null} {...input}/>
+        <InputGroupAddon>
+          {color === "transparent" && (<span>transparent</span>)}
+        </InputGroupAddon>
+        <Input valid={error ? false : null} {...input}/>
     </InputGroup>
+    </label>
   );
 };
 

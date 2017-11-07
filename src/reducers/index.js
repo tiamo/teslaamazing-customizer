@@ -10,8 +10,8 @@ const initialState = {
   successMessage: null,
   step: 1,
   data: {
-    // name: "",
-    // product: "",
+    // name: "test",
+    // product: "M",
     items: {
       // fixme: redux-form remove items object
       "_": null

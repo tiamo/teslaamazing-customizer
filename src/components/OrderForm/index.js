@@ -5,42 +5,9 @@ import {connect} from "react-redux";
 import {reduxForm, SubmissionError} from "redux-form";
 
 import {nextStep, prevStep} from "../../actions";
-
-import StepOne from "./StepOne";
-import StepTwo from "./StepTwo";
-import StepThree from "./StepThree";
-import StepFour from "./StepFour";
-
-// import asyncComponent from "../AsyncComponent";
-// const StepThree = asyncComponent(() => import("./StepThree"));
-// const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-const form = 'order';
-
-const steps = [
-  {
-    title: "Name the project",
-    component: StepOne
-  },
-  {
-    title: "Chose a product",
-    component: StepTwo
-  },
-  {
-    title: "Upload your layouts",
-    component: StepThree
-  },
-  {
-    title: "Pickup inner colors",
-    component: StepFour
-  }
-];
+import steps from "./steps";
 
 class OrderForm extends Component {
-
-  // constructor(props) {
-  //   super(props);
-  // }
 
   render() {
     const {step, handleSubmit, submitting, asyncValidating, error, clearSubmitErrors} = this.props;
@@ -143,7 +110,7 @@ class OrderForm extends Component {
     }
 
     if (step === 4) {
-      if (Object.keys(data.items).length  === 0) {
+      if (Object.keys(data.items).length  <= 1) {
         // errors.items = {
         //   "009": "test"
         // };
@@ -163,7 +130,7 @@ OrderForm.propTypes = {
   step: PropTypes.number,
 };
 
-OrderForm = reduxForm({form})(OrderForm);
+OrderForm = reduxForm({form: "order"})(OrderForm);
 
 OrderForm = connect(
   state => {

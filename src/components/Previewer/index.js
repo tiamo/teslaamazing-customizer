@@ -112,7 +112,7 @@ Previewer.propTypes = {
 
 Previewer = connect(
   state => {
-    console.log(state.app.preview);
+    // console.log(state.app.preview);
     return state.app.preview
   }
 )(Previewer);

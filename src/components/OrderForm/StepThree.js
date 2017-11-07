@@ -9,7 +9,7 @@ import {
 } from "../../constants";
 import Dropzone from "react-dropzone";
 import Previewer from "../Previewer/index";
-import {Field, stopSubmit} from "redux-form";
+import {Field} from "redux-form";
 import formValues from "redux-form/es/formValues";
 import connect from "react-redux/es/connect/connect";
 import {setPreview} from "../../actions";
@@ -27,7 +27,6 @@ class StepThree extends Component {
       highlightPreview: null,
     };
     this.hlTimer = 0;
-    this.renderTask = null;
   }
 
   componentDidMount() {
@@ -85,13 +84,15 @@ class StepThree extends Component {
           ];
 
           if (pdfSize[0] !== validSize[0] || pdfSize[1] !== validSize[1]) {
+            props.dispatch(props.change(name, ""));
             throw 'Incorrect pdf size. Your size is ' + pdfSize.join('x') + ' ' + PRODUCT_SIZE_UNIT +
             ', expected size is ' + validSize.join('x') + ' ' + PRODUCT_SIZE_UNIT + '.';
+
           } else {
             let canvas = this.refs["canvas." + name];
             if (canvas) {
-              canvas.width = viewport.width * 2;
-              canvas.height = viewport.height * 2;
+              canvas.width = viewport.width * 3;
+              canvas.height = viewport.height * 3;
               page.render({
                 canvasContext: canvas.getContext('2d'),
                 viewport: page.getViewport(canvas.width / page.getViewport(1).width)
@@ -152,6 +153,7 @@ class StepThree extends Component {
                 accept={this.props.accept}
                 onDrop={(files) => {
                   onChange(files[0]);
+                  this.setState({isDragging: false})
                 }}
                 onMouseEnter={() => {
                   return this.animatePreviewer(name);
@@ -207,8 +209,6 @@ class StepThree extends Component {
         defaultButton: "Leave Standard",
       },
     ];
-
-    console.log(this.props);
 
     return (
       <Row className={this.state.isDragging ? " is-dragging" : ""}>
