@@ -7444,7 +7444,7 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     .Previewer .book:hover {
       transform: translateY(10px) scale(1); }
       .Previewer .book:hover .cover.front {
-        transform: rotateX(65deg) translateZ(0); }
+        transform: rotateX(65deg) translateY(-2px); }
 
 .OrderForm .form-control {
   font-weight: 300; }
@@ -7680,19 +7680,21 @@ a.text-sunshine:focus, a.text-sunshine:hover {
   background-color: #fed671; }
 
 #step4 .products {
-  padding: 1.5rem 0;
-  overflow-x: scroll;
-  overflow-y: hidden;
   white-space: nowrap;
+  height: 200px;
   max-width: 9999px; }
+  #step4 .products .content {
+    padding: 20px 0 0;
+    position: absolute;
+    height: 180px; }
   #step4 .products .card {
     white-space: normal;
     display: inline-block;
     position: relative;
-    width: 30%;
-    min-width: 150px;
-    height: 135px;
-    margin: 0 3.33% 0 0;
+    width: 100px;
+    min-width: 168px;
+    height: 136px;
+    margin: 0 20px 0 0;
     border-radius: 0;
     border-color: #95989A;
     text-align: center; }
@@ -7723,12 +7725,29 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       font-size: 0.8rem; }
     #step4 .products .card:hover .close {
       display: block; }
+    #step4 .products .card.animate-enter {
+      transform: translateX(100px) translateY(-200px);
+      transition: all 300ms ease-in, opacity 600ms ease-in;
+      opacity: 0.01; }
+      #step4 .products .card.animate-enter-active {
+        opacity: 1;
+        transform: translateX(0) translateY(0); }
+    #step4 .products .card.animate-exit {
+      transition: opacity 400ms ease-in;
+      opacity: 1;
+      transform: none; }
+      #step4 .products .card.animate-exit-active {
+        opacity: 0.01; }
   #step4 .products .Previewer {
     transform: scale(0.28);
     width: 100%;
     height: 100%;
     margin: -20px 0 -30px -40px;
     padding: 0; }
+
+@keyframes openspace {
+  to {
+    height: auto; } }
 
 @media (max-width: 991px) {
   .OrderForm .StepTwo .table {

@@ -10,7 +10,15 @@ import steps from "./steps";
 class OrderForm extends Component {
 
   render() {
-    const {step, handleSubmit, submitting, asyncValidating, error, clearSubmitErrors} = this.props;
+    const {
+      step,
+      handleSubmit,
+      prevStep,
+      submitting,
+      asyncValidating,
+      error,
+      clearSubmitErrors
+    } = this.props;
 
     let item = steps[step - 1];
     if (!item) {
@@ -32,7 +40,9 @@ class OrderForm extends Component {
         </div>
         <div className="OrderForm-footer">
           {step > 1 && (
-            <Button type="button" size="lg" color="outline-secondary" onClick={this.handlePrevStep}
+            <Button type="button" size="lg" color="outline-secondary" onClick={() => {
+              prevStep();
+            }}
                     disabled={submitting || asyncValidating}>
               Prev Step
             </Button>
@@ -52,23 +62,15 @@ class OrderForm extends Component {
   }
 
   /**
-   * @param {Event} e
-   */
-  handlePrevStep = e => {
-    if (this.props.step > 0) {
-      this.props.prevStep();
-    }
-  };
-
-  /**
    * @param data
    */
   handleSubmit = data => {
+    const {step, nextStep, onSubmit} = this.props;
     this.validate(data);
-    if (this.props.step < steps.length) {
-      this.props.nextStep();
+    if (step < steps.length) {
+      nextStep();
     } else {
-      this.props.onSubmit(data);
+      onSubmit(data);
     }
   };
 
@@ -110,7 +112,7 @@ class OrderForm extends Component {
     }
 
     if (step === 4) {
-      if (Object.keys(data.items).length  <= 1) {
+      if (Object.keys(data.items).length <= 1) {
         // errors.items = {
         //   "009": "test"
         // };
@@ -130,7 +132,10 @@ OrderForm.propTypes = {
   step: PropTypes.number,
 };
 
-OrderForm = reduxForm({form: "order"})(OrderForm);
+OrderForm = reduxForm({
+  form: "order",
+  // initialValues: {}
+})(OrderForm);
 
 OrderForm = connect(
   state => {

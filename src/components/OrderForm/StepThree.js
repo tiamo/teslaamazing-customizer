@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import Dropzone from "react-dropzone";
+import {Field, formValues} from "redux-form";
 import {Col, FormFeedback, FormGroup, Row} from "reactstrap";
+import Previewer from "../Previewer";
+import classNames from "classnames"
+import pdfjs from "pdfjs-dist"
+import {setPreview} from "../../actions";
 import {
   PDF_BORDER_SIZE,
   PRODUCT_SIZE_FACTOR,
@@ -7,16 +14,32 @@ import {
   PRODUCTS_MAP,
   TECHNICAL_REQUIREMENTS_URL
 } from "../../constants";
-import Dropzone from "react-dropzone";
-import Previewer from "../Previewer/index";
-import {Field} from "redux-form";
-import formValues from "redux-form/es/formValues";
-import connect from "react-redux/es/connect/connect";
-import {setPreview} from "../../actions";
 
-const pdfjs = require('pdfjs-dist');
+// const pdfjs = require('pdfjs-dist');
 // require('pdfjs-dist/web/compatibility');
 // pdfjs.PDFJS.workerSrc = 'pdf.worker.js';
+
+const sections = [
+  {
+    name: "frontOuter",
+    label: "01 Front Outer",
+  },
+  {
+    name: "frontInner",
+    label: "02 Front Inner",
+    defaultButton: "Leave Empty",
+  },
+  {
+    name: "backInner",
+    label: "03 Back Inner",
+    defaultButton: "Leave Empty",
+  },
+  {
+    name: "backOuter",
+    label: "04 Back Outer",
+    defaultButton: "Leave Standard",
+  },
+];
 
 class StepThree extends Component {
 
@@ -116,9 +139,18 @@ class StepThree extends Component {
 
   };
 
-  renderField = ({input: {name, value, onChange}, meta: {error}, label, defaultButton}) => {
+  renderField = ({input: {name, value, onChange}, meta: {error, asyncValidating}, label, defaultButton}) => {
+
+    let classes = {item: true};
+    if (error) {
+      classes["is-invalid"] = true;
+    }
+    if (asyncValidating) {
+      classes["async-validating"] = true;
+    }
+
     return (
-      <FormGroup className={"item " + (error ? "is-invalid" : "")}>
+      <FormGroup className={classNames(classes)}>
         <div className="item-heading">{label}</div>
         <div className="item-body">
           {value ? (
@@ -156,10 +188,10 @@ class StepThree extends Component {
                   this.setState({isDragging: false})
                 }}
                 onMouseEnter={() => {
-                  return this.animatePreviewer(name);
+                  this.animatePreviewer(name);
                 }}
                 onMouseLeave={() => {
-                  return this.animatePreviewer(null);
+                  this.animatePreviewer(null);
                 }}
               >
                 Select layout
@@ -187,28 +219,6 @@ class StepThree extends Component {
   };
 
   render() {
-
-    const sections = [
-      {
-        name: "frontOuter",
-        label: "01 Front Outer",
-      },
-      {
-        name: "frontInner",
-        label: "02 Front Inner",
-        defaultButton: "Leave Empty",
-      },
-      {
-        name: "backInner",
-        label: "03 Back Inner",
-        defaultButton: "Leave Empty",
-      },
-      {
-        name: "backOuter",
-        label: "04 Back Outer",
-        defaultButton: "Leave Standard",
-      },
-    ];
 
     return (
       <Row className={this.state.isDragging ? " is-dragging" : ""}>

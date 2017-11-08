@@ -8,14 +8,17 @@ import {
 const initialState = {
   firstScreen: process.env.NODE_ENV !== 'development',
   successMessage: null,
-  step: 1,
+  step: 4,
   data: {
-    // name: "test",
-    // product: "M",
+    name: "test",
+    product: "M",
     items: {
-      // fixme: redux-form remove items object
-      "_": null
-      // "009": 112
+      // fixme: redux-form removes items object when it's empty
+      "_": null,
+      // "009": 112,
+      // "010": 112,
+      // "011": 112,
+      // "012": 112,
     }
   },
   preview: {
@@ -29,7 +32,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 
-  // console.log(action);
+  console.log(action);
 
   switch (action.type) {
     case TOGGLE_FIRST_SCREEN:
@@ -53,7 +56,7 @@ const reducer = (state = initialState, action) => {
     case PREV_STEP:
       return {
         ...state,
-        step: state.step - 1
+        step: Math.max(state.step - 1, 1)
       };
     case NEXT_STEP:
       return {

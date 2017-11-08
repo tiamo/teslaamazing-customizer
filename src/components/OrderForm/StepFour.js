@@ -5,17 +5,22 @@ import Previewer from "../Previewer/index";
 import classNames from "classnames"
 import {Field, formValues} from "redux-form";
 
-const renderField = ({input, color, meta: {touched, error}, ...props}) => {
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
+
+import ScrollArea from 'react-scrollbar';
+
+const renderField = ({input, color, meta: {error}, ...props}) => {
   let classes = {};
   classes["color-" + color] = true;
+
   return (
     <label>
-    <InputGroup className={classNames(classes)} {...props}>
+      <InputGroup className={classNames(classes)} {...props}>
         <InputGroupAddon>
           {color === "transparent" && (<span>transparent</span>)}
         </InputGroupAddon>
         <Input valid={error ? false : null} {...input}/>
-    </InputGroup>
+      </InputGroup>
     </label>
   );
 };
@@ -43,7 +48,7 @@ class StepFour extends Component {
                        ref={"input." + sku}
                        color={color}
                        component={renderField}
-                       normalize={this.normalizeField}
+                  // normalize={this.normalizeField}
                        onMouseEnter={(e) => this.changePreviewerColor(color)}
                 />
 
@@ -55,50 +60,42 @@ class StepFour extends Component {
     ));
   }
 
-  renderProducts() {
-
-    const {items, product} = this.props;
-
-    return items && Object.keys(items).reverse().map((sku) => {
-
-      let qty = items[sku];
-      if (!qty) {
-        return "";
-      }
-
-      let input = this.refs["input." + sku];
-      let color = input && input.props.color;
-
-      return (
-        <div key={sku} className="card">
-          <div className="card-body">
-            <div className="card-img">
-              <Previewer product={product} color={color}/>
-            </div>
-            <div className="card-text">{qty} pcs</div>
+  renderProduct(sku, qty) {
+    const {product} = this.props;
+    const input = this.refs["input." + sku];
+    const color = input && input.props.color;
+    // console.log(input);
+    // TODO: input.onChange ...
+    return (
+      <div className="card">
+        <div className="card-body">
+          <div className="card-img">
+            <Previewer product={product} color={color}/>
           </div>
-          <Badge color={color}>{color}</Badge>
-          <button className="icon-close" onClick={() => {
-            this.deleteProduct(sku)
-          }}>
-          </button>
+          <div className="card-text">{qty} pcs</div>
         </div>
-      );
-    });
+        <Badge color={color} pill={true}>{color}</Badge>
+        <button className="icon-close" onClick={(e) => {
+          e.preventDefault();
+          this.deleteProduct(sku);
+        }}>
+        </button>
+      </div>
+    );
   }
 
   render() {
-    const product = PRODUCTS_MAP[this.props.product];
-    if (!product) {
+    const {items, product} = this.props;
+    const PRODUCT = PRODUCTS_MAP[product];
+    if (!PRODUCT) {
       return "";
     }
-    const catalog = product.catalog || [];
     return (
       <div>
         <Row>
           <Col lg="5" xs="12">
             <div className="inputs">
-              {this.renderInputs(catalog)}
+              {this.renderInputs(PRODUCT.catalog)}
             </div>
           </Col>
           <Col lg="7" xs="12">
@@ -110,9 +107,30 @@ class StepFour extends Component {
               backInner: this.props.backInner,
               backOuter: this.props.backOuter,
             }}/>
-            <div className="products">
-              {this.renderProducts(catalog)}
-            </div>
+              <ScrollArea
+                ref="scrollArea"
+                // speed={0.8}
+                className="products"
+                contentClassName="content"
+                horizontal={true}
+                // smoothScrolling= {true}
+                // minScrollSize={40}
+              >
+                <TransitionGroup>
+                {Object.keys(items).reverse().map((key) => {
+                  const qty = items[key];
+                  return qty && (
+                    <CSSTransition
+                      classNames="animate"
+                      timeout={500}
+                      key={key}
+                    >
+                      {this.renderProduct(key, qty)}
+                    </CSSTransition>
+                  );
+                })}
+                </TransitionGroup>
+              </ScrollArea>
           </Col>
         </Row>
       </div>
@@ -122,7 +140,6 @@ class StepFour extends Component {
   deleteProduct = key => {
     const {dispatch, change} = this.props;
     dispatch(change("items." + key, ""));
-
   };
 
   normalizeField = value => {
@@ -139,11 +156,11 @@ class StepFour extends Component {
 }
 
 StepFour = formValues(
-  'product',
   'frontOuter',
   'frontInner',
   'backInner',
   'backOuter',
+  'product',
   'items'
 )(StepFour);
 
