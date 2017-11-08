@@ -43,12 +43,12 @@ class OrderForm extends Component {
             <Button type="button" size="lg" color="outline-secondary" onClick={() => {
               prevStep();
             }}
-                    disabled={submitting || asyncValidating}>
+                    disabled={submitting || asyncValidating !== false}>
               Prev Step
             </Button>
           )}
           <Button type="submit" size="lg" color="outline-secondary"
-                  disabled={submitting || asyncValidating}>
+                  disabled={submitting || asyncValidating !== false}>
             Next Step
           </Button>
         </div>

@@ -80,19 +80,10 @@ class StepThree extends Component {
 
   validateField = (value, allValues, props, name) => {
 
-    // console.log("VALIDATE", name, value);
-
     if (value) {
-
       const {startAsyncValidation, stopAsyncValidation} = props;
-
-      // props.dispatch(props.autofill(name, null));
-      // console.log(props);
-
-      startAsyncValidation();
-
+      startAsyncValidation(name);
       const product = PRODUCTS_MAP[allValues.product];
-
       pdfjs.getDocument({url: URL.createObjectURL(value)}).then((pdf) => {
 
         pdf.getPage(1).then((page) => {
@@ -108,8 +99,9 @@ class StepThree extends Component {
 
           if (pdfSize[0] !== validSize[0] || pdfSize[1] !== validSize[1]) {
             props.dispatch(props.change(name, ""));
-            throw 'Incorrect pdf size. Your size is ' + pdfSize.join('x') + ' ' + PRODUCT_SIZE_UNIT +
-            ', expected size is ' + validSize.join('x') + ' ' + PRODUCT_SIZE_UNIT + '.';
+
+            throw new Error('Incorrect pdf size. Your size is ' + pdfSize.join('x') + ' ' + PRODUCT_SIZE_UNIT +
+            ', expected size is ' + validSize.join('x') + ' ' + PRODUCT_SIZE_UNIT + '.');
 
           } else {
             let canvas = this.refs["canvas." + name];
@@ -122,18 +114,17 @@ class StepThree extends Component {
               }).then(() => {
                 this.props.setPreview(name, canvas.toDataURL('image/jpeg'));
               });
-              // props.dispatch(props.autofill(name, value));
             }
           }
 
           stopAsyncValidation();
 
         }).catch((error) => {
-          stopAsyncValidation({[name]: error});
+          stopAsyncValidation({[name]: error.message});
         });
 
       }).catch((error) => {
-        stopAsyncValidation({[name]: error});
+        stopAsyncValidation({[name]: error.message});
       });
     }
 
@@ -153,7 +144,7 @@ class StepThree extends Component {
       <FormGroup className={classNames(classes)}>
         <div className="item-heading">{label}</div>
         <div className="item-body">
-          {value ? (
+          {value && !asyncValidating ? (
             <div className="item-file">
               <span
                 onMouseEnter={() => {

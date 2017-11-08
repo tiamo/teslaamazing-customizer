@@ -48,7 +48,7 @@ class StepFour extends Component {
                        ref={"input." + sku}
                        color={color}
                        component={renderField}
-                  // normalize={this.normalizeField}
+                       normalize={this.normalizeField}
                        onMouseEnter={(e) => this.changePreviewerColor(color)}
                 />
 
@@ -107,16 +107,16 @@ class StepFour extends Component {
               backInner: this.props.backInner,
               backOuter: this.props.backOuter,
             }}/>
-              <ScrollArea
-                ref="scrollArea"
-                // speed={0.8}
-                className="products"
-                contentClassName="content"
-                horizontal={true}
-                // smoothScrolling= {true}
-                // minScrollSize={40}
-              >
-                <TransitionGroup>
+            <ScrollArea
+              ref="scrollArea"
+              // speed={0.8}
+              className="products"
+              contentClassName="content"
+              horizontal={true}
+              // smoothScrolling= {true}
+              // minScrollSize={40}
+            >
+              <TransitionGroup>
                 {Object.keys(items).reverse().map((key) => {
                   const qty = items[key];
                   return qty && (
@@ -129,8 +129,8 @@ class StepFour extends Component {
                     </CSSTransition>
                   );
                 })}
-                </TransitionGroup>
-              </ScrollArea>
+              </TransitionGroup>
+            </ScrollArea>
           </Col>
         </Row>
       </div>
