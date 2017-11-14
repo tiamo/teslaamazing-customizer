@@ -3,10 +3,25 @@ import {Field} from "redux-form";
 import {Col, FormGroup, Label, Row, Input} from "reactstrap";
 import {PRODUCT_SIZE_UNIT, PRODUCTS_MAP} from "../../constants";
 
+const renderRect = (props) => (
+  <svg
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox={"0 0 " + props.width + " " + props.height}
+       preserveAspectRatio="xMaxYMax meet">
+    <rect x="0" y="0" {...props} />
+  </svg>
+);
+
 const renderField = ({input, label, size, meta: {error}}) => (
   <FormGroup className={input.value === label ? "checked" : null}>
     <Label tabIndex="99">
-      <div className="product-box"/>
+      <div className="product-box">
+        {renderRect({
+          width: size[0],
+          height: size[1],
+          fill: "none",
+        })}
+      </div>
       <div className="product-name">{label}</div>
       <div className="product-desc">
         {size[0] + " x " + size[1] + " " + PRODUCT_SIZE_UNIT}

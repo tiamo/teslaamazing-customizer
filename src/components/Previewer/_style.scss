@@ -1,12 +1,15 @@
 $width: 400px;
 $height: 200px;
-$pages-count: 20;
+$pages-count: 50;
 $initial-deg: 40;
 
 $inner-color: #f9f9f9;
 $border-width: 0;
 
 $highlight-color: rgba(#f74561, 0.2);
+
+$page-color-lighten: 10;
+$rotate-factor: 0.1;
 
 .Previewer {
   position: relative;
@@ -35,8 +38,8 @@ $highlight-color: rgba(#f74561, 0.2);
       left: 0;
       width: 100%;
       height: 100%;
-      border: 4px solid rgba(#fff, 0.6);
-      opacity:0;
+      border: 7px solid rgba(#fff, 0.6);
+      opacity: 0;
       &.active {
         opacity: 1;
       }
@@ -61,61 +64,34 @@ $highlight-color: rgba(#f74561, 0.2);
     }
 
     .cover > li, .page > li {
-      box-shadow: inset 0 0 5px rgba(150, 150, 150, 0.1), inset 0 0 1px rgba(150, 150, 150, 0.1);
+      box-shadow: inset 0 0 5px rgba(150, 150, 150, 0.1), inset 0 0 1px rgba(200, 200, 200, 0.1);
     }
 
     // Cover
 
     .cover {
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       transform-origin: 100% 0;
 
-      canvas {
-        //position: absolute;
-        //top: 0;
-        //left: 0;
-        //z-index: 90;
-        //z-index: 90;
-        //width: 100%;
-        //height: 100%;
-      }
-
       > li {
-
-        background-size: cover;
-
-        //&:first-child:after, &:first-child:before, &:last-child:after, &:last-child:before {
-        //  background: red; //rgba(#fff, 1);
-        //  opacity: 0.6;
-        //  position: absolute;
-        //  top: 0;
-        //  left: 0;
-        //}
-
-        //&:first-child:after, &:last-child:after {
-        //  //transform: translateY($height);
-        //}
-
-        //&:first-child:before, &:first-child:after {
-        //  height: 100%;
-        //  width: $border-width + px;
-        //}
-        //&:last-child:before, &:last-child:after {
-        //  width: 100%;
-        //  height: $border-width + px;
-        //}
+        // TODO: think
+        background-position: -4mm;
+        background-color: #eee;
+        background-size: 108%;
+        //background-size: cover;
+        background-repeat: no-repeat;
+        backface-visibility: hidden;
+        cursor: default;
+        user-select: none;
       }
 
       &.front {
-        transform: rotateX($initial-deg + 8 + deg) translateZ(1px);
+        transform: rotateX(($initial-deg + ($pages-count*$rotate-factor)) + deg) translateZ(0);
         z-index: 100;
+
         > li {
+          //border-bottom: 1px solid #fff;
           &:first-child {
-            background-color: #eee;
-            background-size: cover;
-            backface-visibility: hidden;
-            cursor: default;
-            user-select: none;
             //transform: translateY(1px);
             &:before {
               //transform: translateX(400px);
@@ -126,9 +102,10 @@ $highlight-color: rgba(#f74561, 0.2);
               //transform: translateX($width - 1);
               //transform: rotateY(-90deg) translateZ(-2px) translateX(2px);
             }
+            border-bottom: 1px solid #fff;
           }
           &:last-child {
-            transform: rotateY(180deg) rotateZ(180deg) translateZ(1px);
+            transform: rotateY(180deg) rotateZ(180deg) translateZ(0);
             background-color: $inner-color;
             &:before {
               //display:none;
@@ -142,30 +119,24 @@ $highlight-color: rgba(#f74561, 0.2);
             }
           }
         }
-
-        svg {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          z-index: 100;
-        }
       }
 
       &.back {
-        transform: rotateX($initial-deg + deg) translateZ(0);
-        box-shadow: 0 5px 5px 0 #aaa;
+        transform: rotateX($initial-deg + deg);
+        box-shadow: 0 3px 5px 0 #ddd;
         z-index: -1;
         li {
           &:first-child {
             background-color: $inner-color;
-            transform: translateZ(1px);
+            //transform: translateZ(1px);
             &:before {
               //transform: rotateY(90deg) translateZ(158px) translateX(2px);
             }
             &:after {
-              transform: translateX($width - 1);
+              transform: translateX($width);
               //transform: rotateY(90deg) translateZ(-2px) translateX(2px);
             }
+            border-bottom: 1px solid #fff;
           }
           &:last-child {
             transform: rotateY(180deg);
@@ -187,6 +158,7 @@ $highlight-color: rgba(#f74561, 0.2);
 
     .page {
       //width: 98%;
+      //height:100%;
       top: 0;
       left: 0;
       //z-index: 20;
@@ -204,7 +176,7 @@ $highlight-color: rgba(#f74561, 0.2);
         $i: $pages-count;
         @while $i > 0 {
           &:nth-child(#{$i}) {
-            transform: rotateX($initial-deg + ($i*0.7) + deg);
+            transform: rotateX($initial-deg + ($i * $rotate-factor) + deg);
             //z-index: 100 + $i;
           }
           $i: $i - 1;
@@ -213,8 +185,11 @@ $highlight-color: rgba(#f74561, 0.2);
       }
     }
 
-    // Colors
+    // ----------------------------------------
+    // Modificators
+    // ----------------------------------------
 
+    // Colors
     @each $name, $color in $product-colors {
       &.color-#{$name} {
         .front {
@@ -232,11 +207,21 @@ $highlight-color: rgba(#f74561, 0.2);
         .page {
           > li {
             @if $name == transparent {
-              background: transparent;
+              background: #fff;
             } @else {
-              background: lighten($color, 10);
+              background: lighten($color, $page-color-lighten);
             }
           }
+        }
+      }
+    }
+
+    $pages-count-half: $pages-count/2;
+    // Pages count
+    &.p#{($pages-count-half)} {
+      .cover {
+        &.front {
+          transform: rotateX(($initial-deg + ($pages-count-half*$rotate-factor)) + deg) translateZ(0);
         }
       }
     }
@@ -273,6 +258,7 @@ $highlight-color: rgba(#f74561, 0.2);
       transform: translateY(0) scale(1.1);
       .cover.front {
 
+        transition: z-index 0s;
         transform: rotateX(155deg);
         z-index: 0;
 
@@ -289,7 +275,7 @@ $highlight-color: rgba(#f74561, 0.2);
           $i: 0;
           @while $i < $pages-count {
             &:nth-child(#{$i}) {
-              $deg: $initial-deg + 100 + $i;
+              $deg: $initial-deg + 100 + ($i * $rotate-factor);
               transform: rotateX($deg+ deg);
             }
             $i: $i + 1;
@@ -311,6 +297,7 @@ $highlight-color: rgba(#f74561, 0.2);
 
       .cover.back {
         transform: rotateX(130deg);
+        box-shadow: none;
         //li:last-child {
         //  .highlight {
         //    background-color: $highlight-color;

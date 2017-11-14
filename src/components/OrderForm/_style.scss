@@ -78,7 +78,7 @@
       padding-top: 0;
       padding-bottom: 0;
     }
-    height: 320px;
+    height: 350px;
   }
 
   h2 {
@@ -121,9 +121,17 @@
     }
 
     &-box {
-      border: 2px solid #aaa;
+      //border: 2px solid #aaa;
       width: 100%;
-      margin: 0 auto 0.6rem;
+      margin: 0 0 0.6rem;
+      vertical-align: bottom;
+      //padding: 5px;
+      svg {
+        display: block;
+        padding: 1px;
+        width: 100%;
+        border: 2px solid #aaa;
+      }
     }
 
     &-name {
@@ -142,63 +150,66 @@
     &--s {
       width: 20%;
       .product-box {
-        //max-width: 59px;
-        height: 42px;
+        min-width: 35px;
       }
     }
     &--m {
       width: 30%;
       .product-box {
-        //max-width: 84px;
-        height: 60px;
+        min-width: 84px;
       }
     }
     &--l {
       width: 50%;
       .product-box {
-        //max-width: 169px;
-        height: 104px;
+        min-width: 169px;
       }
     }
 
     &--a5 {
-      width: 25%;
+      width: 23%;
       .product-box {
-        max-width: 68px;
-        height: 97px;
+        //max-width: 68px;
       }
+      padding-left: 3%;
+      padding-right: 5%;
     }
 
     &--a4 {
-      width: 35%;
+      width: 30%;
+      padding-left: 5%;
+      padding-right: 5%;
       .product-box {
-        max-width: 97px;
-        height: 138px;
       }
     }
 
     &--a3 {
       width: 40%;
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-top: 5% !important;
       .product-box {
-        max-width: 138px;
-        height: 196px;
+        //max-width: 138px;
+        //height: 196px;
+        svg {
+        }
       }
     }
 
     .custom-control-indicator {
       background: #F8F8F8;
       //border: 2px solid #868686;
-      box-shadow: 0 0 0 2px #fff, 0 0 0 4px #868686;
+      box-shadow: 0 0 0 3px #fff, 0 0 0 5px #868686;
     }
 
     .was-validated .custom-control-input:invalid ~ .custom-control-indicator, .custom-control-input.is-invalid ~ .custom-control-indicator {
       background-color: rgba(220, 53, 69, 0.25);
-      box-shadow: 0 0 0 2px #fff, 0 0 0 4px $red;
+      box-shadow: 0 0 0 3px #fff, 0 0 0 5px $red;
     }
 
     .form-group {
       &.checked {
-        .product-box {
+        .product-box svg {
           background: #CDF0C2;
         }
         input {
@@ -206,7 +217,7 @@
         }
         .custom-control-indicator {
           background: #CDF0C2;
-          box-shadow: 0 0 0 2px #fff, 0 0 0 4px #868686;
+          box-shadow: 0 0 0 3px #fff, 0 0 0 5px #868686;
         }
       }
     }
@@ -218,11 +229,14 @@
   .item {
     margin: 0 0 24px;
     .btn-md {
-      padding: 17px 0;
-      width: 180px;
+      //padding: 17px 0;
+      padding-top: 17px;
+      padding-bottom: 17px;
+      margin-top: 0.5rem !important;
+      //width: 180px;
     }
     &-heading {
-      margin: 0 0 7px;
+      //margin: 0 0 7px;
       font-weight: 700;
       font-size: 1.06rem;
     }
@@ -231,7 +245,9 @@
         margin: 0 1rem 0 0;
       }
       .icon-success {
-        margin: 0 0 0 0.5rem;
+        //margin: 0 0 0 0.5rem;
+        margin-top: 1.1rem;
+        display: block;
       }
     }
     &-file {
@@ -468,7 +484,20 @@
 
 @include media-breakpoint-down(sm) {
   .OrderForm-header {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    line-height: 3rem;
+    > span {
+      font-size: 1.548rem;
+      float: left;
+      border: 1px solid #656565;
+      border-radius: 100%;
+      width: 3rem;
+      height: 3rem;
+      line-height: 3rem;
+      text-align: center;
+      margin: 0 14px 0 0;
+      font-weight: 200;
+    }
   }
 }
 

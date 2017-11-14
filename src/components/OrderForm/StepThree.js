@@ -80,7 +80,9 @@ class StepThree extends Component {
 
   validateField = (value, allValues, props, name) => {
 
-    if (value) {
+    // console.log(props);
+
+    if (value && !this.props[name]) {
       const {startAsyncValidation, stopAsyncValidation} = props;
       startAsyncValidation(name);
       const product = PRODUCTS_MAP[allValues.product];
@@ -98,7 +100,6 @@ class StepThree extends Component {
           ];
 
           if (pdfSize[0] !== validSize[0] || pdfSize[1] !== validSize[1]) {
-            props.dispatch(props.change(name, ""));
 
             throw new Error('Incorrect pdf size. Your size is ' + pdfSize.join('x') + ' ' + PRODUCT_SIZE_UNIT +
             ', expected size is ' + validSize.join('x') + ' ' + PRODUCT_SIZE_UNIT + '.');
@@ -106,20 +107,38 @@ class StepThree extends Component {
           } else {
             let canvas = this.refs["canvas." + name];
             if (canvas) {
+
+              // x3 for better image quality
               canvas.width = viewport.width * 3;
               canvas.height = viewport.height * 3;
-              page.render({
-                canvasContext: canvas.getContext('2d'),
-                viewport: page.getViewport(canvas.width / page.getViewport(1).width)
-              }).then(() => {
-                this.props.setPreview(name, canvas.toDataURL('image/jpeg'));
+
+              // validate text elements
+              page.getTextContent().then((res)=> {
+
+                if (res.items.length) {
+                  throw new Error('Invalid pdf file. Your file contains text elements, it needs to upload a vector file.');
+                } else {
+
+                  // render page
+                  page.render({
+                    canvasContext: canvas.getContext('2d'),
+                    viewport: page.getViewport(canvas.width / page.getViewport(1).width),
+                  }).then(() => {
+                    this.props.setPreview(name, canvas.toDataURL('image/jpeg'));
+                  });
+                }
+              }).catch((error) => {
+                props.dispatch(props.change(name, ""));
+                stopAsyncValidation({[name]: error.message});
               });
+
             }
           }
 
           stopAsyncValidation();
 
         }).catch((error) => {
+          props.dispatch(props.change(name, ""));
           stopAsyncValidation({[name]: error.message});
         });
 
@@ -143,64 +162,67 @@ class StepThree extends Component {
     return (
       <FormGroup className={classNames(classes)}>
         <div className="item-heading">{label}</div>
-        <div className="item-body">
-          {value && !asyncValidating ? (
+        <div className="item-body"
+             onMouseEnter={() => {
+               return this.animatePreviewer(name);
+             }}
+             onMouseLeave={() => {
+               return this.animatePreviewer(null);
+             }}
+        >
+          {value && !error && !asyncValidating ? (
             <div className="item-file">
-              <span
-                onMouseEnter={() => {
-                  return this.animatePreviewer(name);
-                }}
-                onMouseLeave={() => {
-                  return this.animatePreviewer(null);
-                }}>
+              <span>
                   {value.name}
               </span>
               <span className="icon-success icon-valid"/>
               <button type="button" className="btn btn-link"
                       onClick={() => {
-                        if (window.confirm('Are you sure?')) {
+                        // if (window.confirm('Are you sure?')) {
                           onChange(null);
                           this.props.setPreview(name, null)
-                        }
+                        // }
                       }}>
                 Delete
               </button>
             </div>
           ) : (
             <div className="item-select-file">
-              <Dropzone
-                className="btn btn-md btn-outline-secondary action-upload"
-                acceptClassName="btn-outline-success"
-                rejectClassName="btn-outline-danger"
-                multiple={false}
-                accept={this.props.accept}
-                onDrop={(files) => {
-                  onChange(files[0]);
-                  this.setState({isDragging: false})
-                }}
-                onMouseEnter={() => {
-                  this.animatePreviewer(name);
-                }}
-                onMouseLeave={() => {
-                  this.animatePreviewer(null);
-                }}
-              >
-                Select layout
-              </Dropzone>
-              {defaultButton && (
-                <button type="button"
-                        className={"btn btn-md " + (value === false ? "btn-outline-success" : "btn-outline-secondary")}
-                        onClick={() => {
-                          onChange(false);
-                          this.props.setPreview(name, null)
-                        }}
-                >
-                  {defaultButton}
-                </button>
-              )}
-              {value === false && (
-                <span className="icon-success icon-valid"/>
-              )}
+              <Row>
+                <Col sm="5" xs="12">
+                  <Dropzone
+                    className="btn btn-md btn-block btn-outline-secondary action-upload"
+                    acceptClassName="btn-outline-success"
+                    rejectClassName="btn-outline-danger"
+                    multiple={false}
+                    accept={this.props.accept}
+                    onDrop={(files) => {
+                      onChange(files[0]);
+                      this.setState({isDragging: false})
+                    }}
+                  >
+                    Select layout
+                  </Dropzone>
+                </Col>
+                <Col sm="5" xs="12">
+                  {defaultButton && (
+                    <button type="button"
+                            className={"btn btn-block btn-md " + (value === false ? "btn-outline-success" : "btn-outline-secondary")}
+                            onClick={() => {
+                              onChange(false);
+                              this.props.setPreview(name, null)
+                            }}
+                    >
+                      {defaultButton}
+                    </button>
+                  )}
+                </Col>
+                <Col sm="2">
+                  {value === false && (
+                    <span className="icon-success icon-valid"/>
+                  )}
+                </Col>
+              </Row>
             </div>
           )}
         </div>
@@ -213,9 +235,9 @@ class StepThree extends Component {
 
     return (
       <Row className={this.state.isDragging ? " is-dragging" : ""}>
-        <Col lg="6" xs="12">
+        <Col lg="5" xs="12">
           <p>
-            You mockups must be strictly in PDF format.
+            Your mockups must be strictly in PDF format.
             Please, make sure that your files comply with all the
             {" "}
             <a target="_blank" rel="noopener noreferrer" href={TECHNICAL_REQUIREMENTS_URL}>
@@ -231,7 +253,7 @@ class StepThree extends Component {
             />
           ))}
         </Col>
-        <Col lg="6" xs="12">
+        <Col lg="7" xs="12">
 
           <Previewer {...{
             product: this.props.product,

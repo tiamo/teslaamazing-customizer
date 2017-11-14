@@ -25,6 +25,17 @@ class Previewer extends Component {
     }
   }
 
+  static pagesCount(product) {
+    switch (product) {
+      case 'A5':
+      case 'A4':
+      case 'A3':
+        return 25;
+      default:
+        return 50;
+    }
+  }
+
   renderCoverSide(name) {
     return (
       <li style={{"backgroundImage": `url(${this.props[name]})`}}>
@@ -40,9 +51,11 @@ class Previewer extends Component {
     let {
       highlight,
       color,
-      product
+      product,
+      // pagesCount
     } = this.props;
 
+    let pagesCount = Previewer.pagesCount(product);
     product = PRODUCTS_MAP[product];
     if (!product) {
       return "Unknown product";
@@ -57,6 +70,7 @@ class Previewer extends Component {
 
     let classes = {book: true};
     classes["color-" + color] = true;
+    classes["p" + pagesCount] = true;
     if (highlight) {
       classes["highlight-" + highlight] = true;
     }
@@ -76,16 +90,9 @@ class Previewer extends Component {
           </ul>
 
           <ul className="page">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            {[...Array(pagesCount-1)].map((x, i) =>
+              <li key={i}></li>
+            )}
           </ul>
 
           <ul className="cover back">
@@ -103,7 +110,8 @@ class Previewer extends Component {
 
 Previewer.defaultProps = {
   color: "white",
-  product: "M"
+  product: "M",
+  pagesCount: 20
 };
 
 Previewer.propTypes = {
