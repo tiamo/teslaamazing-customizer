@@ -365,6 +365,7 @@
       border-radius: 0;
       border-color: #95989A;
       text-align: center;
+
       .badge {
         display: inline-block;
         position: absolute;
@@ -372,6 +373,7 @@
         left: 25%;
         width: 50%;
       }
+
       .icon-close {
         transition: all 0.8s ease;
         font-weight: 300;
@@ -388,17 +390,30 @@
         outline: 0;
         cursor: pointer;
       }
-      &-img {
-        height: 100px;
+
+      &-body {
+        padding: 7px;
       }
+
+      &-img {
+        height: 94px;
+        overflow: hidden;
+        //border:1px solid red;
+      }
+
       &-text {
         font-size: 0.8rem;
       }
+
       &:hover {
         .close {
           display: block;
         }
       }
+
+      transition-delay: 2s;
+
+      // card animation
 
       &.animate-enter {
         transform: translateX(100px) translateY(-200px);
@@ -422,18 +437,41 @@
       }
 
     }
-    max-width: 9999px;
+    //max-width: 9999px;
 
     .Previewer {
-      transform: scale(0.28);
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      margin: -20px 0 -30px -40px;
-      padding: 0;
+      //margin: -20px 0 -30px -40px;
+      padding: 1.4rem 0;
+      margin: 0;
 
-      .size-m {
-
+      .book {
+        //transform: scale(0.26);
+        //margin-top: -4rem;
       }
+
+      //.size-S {
+      //  margin-top:1rem;
+      //  margin-left: 5.5rem;
+      //}
+      //
+      .size-M {
+        margin-top: 0.7rem;
+      }
+
+      .size-L {
+        margin-top: 0.5rem;
+      }
+      //
+      //.size-A5 {
+      //  margin-top:1rem;
+      //  margin-left: auto;
+      //}
+
     }
   }
 

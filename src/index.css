@@ -7215,7 +7215,7 @@ a.text-sunshine:focus, a.text-sunshine:hover {
         cursor: default;
         user-select: none; }
       .Previewer .book .cover.front {
-        transform: rotateX(45deg) translateZ(0);
+        transform: rotateX(45deg) translateZ(1px);
         z-index: 100; }
         .Previewer .book .cover.front > li:first-child {
           border-bottom: 1px solid #fff; }
@@ -7623,9 +7623,9 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       .Previewer .book.highlight-backOuter .page li:nth-child(49) {
         transform: rotateX(199deg); }
     .Previewer .book:hover {
-      transform: translateY(10px) scale(1); }
+      transform: translateY(0.5rem) scale(1); }
       .Previewer .book:hover .cover.front {
-        transform: rotateX(65deg) translateY(-2px); }
+        transform: rotateX(65deg); }
 
 .OrderForm .form-control {
   font-weight: 300; }
@@ -7866,8 +7866,7 @@ a.text-sunshine:focus, a.text-sunshine:hover {
 
 #step4 .products {
   white-space: nowrap;
-  height: 200px;
-  max-width: 9999px; }
+  height: 200px; }
   #step4 .products .content {
     padding: 20px 0 0;
     position: absolute;
@@ -7882,7 +7881,8 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     margin: 0 20px 0 0;
     border-radius: 0;
     border-color: #95989A;
-    text-align: center; }
+    text-align: center;
+    transition-delay: 2s; }
     #step4 .products .card .badge {
       display: inline-block;
       position: absolute;
@@ -7904,8 +7904,11 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       font-size: 1.55rem;
       outline: 0;
       cursor: pointer; }
+    #step4 .products .card-body {
+      padding: 7px; }
     #step4 .products .card-img {
-      height: 100px; }
+      height: 94px;
+      overflow: hidden; }
     #step4 .products .card-text {
       font-size: 0.8rem; }
     #step4 .products .card:hover .close {
@@ -7924,11 +7927,17 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       #step4 .products .card.animate-exit-active {
         opacity: 0.01; }
   #step4 .products .Previewer {
-    transform: scale(0.28);
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    margin: -20px 0 -30px -40px;
-    padding: 0; }
+    padding: 1.4rem 0;
+    margin: 0; }
+    #step4 .products .Previewer .size-M {
+      margin-top: 0.7rem; }
+    #step4 .products .Previewer .size-L {
+      margin-top: 0.5rem; }
 
 @keyframes openspace {
   to {

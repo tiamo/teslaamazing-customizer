@@ -19,7 +19,7 @@ class Previewer extends Component {
       case 'A4':
         return 0.4;
       case 'A3':
-        return 0.33;
+        return 0.29;
       default:
         return 1;
     }
@@ -52,8 +52,12 @@ class Previewer extends Component {
       highlight,
       color,
       product,
-      // pagesCount
+      scale
     } = this.props;
+
+    if (!scale) {
+      scale = 1;
+    }
 
     let pagesCount = Previewer.pagesCount(product);
     product = PRODUCTS_MAP[product];
@@ -63,14 +67,16 @@ class Previewer extends Component {
 
     // Calculate Previewer size
     let scaleFactor = Previewer.scaleFactor(product.name);
+
     this.size = [
-      ((product.size[0] + PDF_BORDER_SIZE) / PRODUCT_SIZE_FACTOR) * scaleFactor,
-      ((product.size[1] + PDF_BORDER_SIZE) / PRODUCT_SIZE_FACTOR) * scaleFactor
+      ((product.size[0] + PDF_BORDER_SIZE) / PRODUCT_SIZE_FACTOR) * scaleFactor * scale,
+      ((product.size[1] + PDF_BORDER_SIZE) / PRODUCT_SIZE_FACTOR) * scaleFactor * scale
     ];
 
     let classes = {book: true};
     classes["color-" + color] = true;
     classes["p" + pagesCount] = true;
+    classes["size-" + product.name] = true;
     if (highlight) {
       classes["highlight-" + highlight] = true;
     }

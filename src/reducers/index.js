@@ -8,7 +8,7 @@ import {
 const initialState = {
   firstScreen: process.env.NODE_ENV !== 'development',
   successMessage: null,
-  step: 3,
+  step: 4,
   data: {
     name: "test",
     product: "M",

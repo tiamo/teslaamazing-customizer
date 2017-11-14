@@ -4,10 +4,39 @@ import {MAX_QTY, PRODUCTS_MAP} from "../../constants";
 import Previewer from "../Previewer/index";
 import classNames from "classnames"
 import {Field, formValues} from "redux-form";
+import {debounce} from "lodash";
 
 import {CSSTransition, TransitionGroup} from 'react-transition-group'
 
 import ScrollArea from 'react-scrollbar';
+
+const PRODUCT_PREVIEW_SCALE = 0.26;
+
+class InputDebounced extends Component {
+
+  constructor(props) {
+    super();
+    this.state = {value: props.value};
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({value: props.value});
+  }
+
+  componentWillMount() {
+    this.forwardChange = debounce(this.props.onChange, 1500);
+  }
+
+  onChange = e => {
+    e.persist();
+    this.setState({value: e.target.value});
+    this.forwardChange(e);
+  };
+
+  render() {
+    return <Input {...this.props} onChange={this.onChange} value={this.state.value} />
+  }
+}
 
 const renderField = ({input, color, meta: {error}, ...props}) => {
   let classes = {};
@@ -19,7 +48,7 @@ const renderField = ({input, color, meta: {error}, ...props}) => {
         <InputGroupAddon>
           {color === "transparent" && (<span>transparent</span>)}
         </InputGroupAddon>
-        <Input valid={error ? false : null} {...input}/>
+        <InputDebounced valid={error ? false : null}  {...input}/>
       </InputGroup>
     </label>
   );
@@ -32,10 +61,41 @@ class StepFour extends Component {
     this.state = {
       color: "white"
     };
+
+    this.product = PRODUCTS_MAP[this.props.product];
+    // TODO: optimize
+    this.inputs = {};
   }
 
-  renderInputs(catalog) {
-    return catalog.map((item, key) => (
+  renderProduct(sku, qty) {
+    const {product} = this.props;
+    const input = this.inputs[sku];
+    const color = input && input.props.color;
+    // console.log(input);
+    // TODO: input.onChange ...
+    return (
+      <div className="card">
+        <div className="card-body">
+          <div className="card-img">
+            <Previewer product={product} color={color} scale={PRODUCT_PREVIEW_SCALE}/>
+          </div>
+          <div className="card-text">{qty} pcs</div>
+        </div>
+        <Badge color={color} pill={true}>{color}</Badge>
+        <button className="icon-close" onClick={(e) => {
+          e.preventDefault();
+          this.deleteProduct(sku);
+        }}>
+        </button>
+      </div>
+    );
+  }
+
+  renderInputs() {
+    if (!this.product) {
+      return "";
+    }
+    return this.product.catalog.map((item, key) => (
       <div key={key} className="card">
         <div className="card-header">
           {item.title}
@@ -45,7 +105,9 @@ class StepFour extends Component {
             {item.items.map(({color, sku}, key) => (
               <Col key={key} xs="6">
                 <Field name={"items." + sku}
-                       ref={"input." + sku}
+                       ref={(ref) => {
+                         this.inputs[sku] = ref
+                       }}
                        color={color}
                        component={renderField}
                        normalize={this.normalizeField}
@@ -60,42 +122,20 @@ class StepFour extends Component {
     ));
   }
 
-  renderProduct(sku, qty) {
-    const {product} = this.props;
-    const input = this.refs["input." + sku];
-    const color = input && input.props.color;
-    // console.log(input);
-    // TODO: input.onChange ...
-    return (
-      <div className="card">
-        <div className="card-body">
-          <div className="card-img">
-            <Previewer product={product} color={color}/>
-          </div>
-          <div className="card-text">{qty} pcs</div>
-        </div>
-        <Badge color={color} pill={true}>{color}</Badge>
-        <button className="icon-close" onClick={(e) => {
-          e.preventDefault();
-          this.deleteProduct(sku);
-        }}>
-        </button>
-      </div>
-    );
-  }
-
   render() {
-    const {items, product} = this.props;
-    const PRODUCT = PRODUCTS_MAP[product];
-    if (!PRODUCT) {
+
+    if (!this.product) {
       return "";
     }
+
+    const {items} = this.props;
+
     return (
       <div>
         <Row>
           <Col lg="5" xs="12">
             <div className="inputs">
-              {this.renderInputs(PRODUCT.catalog)}
+              {this.renderInputs()}
             </div>
           </Col>
           <Col lg="7" xs="12">
@@ -109,12 +149,9 @@ class StepFour extends Component {
             }}/>
             <ScrollArea
               ref="scrollArea"
-              // speed={0.8}
               className="products"
               contentClassName="content"
               horizontal={true}
-              // smoothScrolling= {true}
-              // minScrollSize={40}
             >
               <TransitionGroup>
                 {Object.keys(items).reverse().map((key) => {
@@ -137,9 +174,13 @@ class StepFour extends Component {
     );
   }
 
-  deleteProduct = key => {
+  updateProduct = (key, value) => {
     const {dispatch, change} = this.props;
-    dispatch(change("items." + key, ""));
+    dispatch(change("items." + key, value));
+  };
+
+  deleteProduct = key => {
+    this.updateProduct(key, "")
   };
 
   normalizeField = value => {
