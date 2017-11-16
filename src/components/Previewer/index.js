@@ -15,11 +15,11 @@ class Previewer extends Component {
       case 'L':
         return 0.8;
       case 'A5':
-        return 0.4;
+        return 0.6;
       case 'A4':
-        return 0.4;
+        return 0.46;
       case 'A3':
-        return 0.29;
+        return 0.33;
       default:
         return 1;
     }
@@ -30,7 +30,7 @@ class Previewer extends Component {
       case 'A5':
       case 'A4':
       case 'A3':
-        return 25;
+        return 15;
       default:
         return 50;
     }
@@ -69,8 +69,8 @@ class Previewer extends Component {
     let scaleFactor = Previewer.scaleFactor(product.name);
 
     this.size = [
-      ((product.size[0] + PDF_BORDER_SIZE) / PRODUCT_SIZE_FACTOR) * scaleFactor * scale,
-      ((product.size[1] + PDF_BORDER_SIZE) / PRODUCT_SIZE_FACTOR) * scaleFactor * scale
+      ((product.size[0]) / PRODUCT_SIZE_FACTOR) * scaleFactor * scale,
+      ((product.size[1]) / PRODUCT_SIZE_FACTOR) * scaleFactor * scale
     ];
 
     let classes = {book: true};
@@ -78,7 +78,8 @@ class Previewer extends Component {
     classes["p" + pagesCount] = true;
     classes["size-" + product.name] = true;
     if (highlight) {
-      classes["highlight-" + highlight] = true;
+      classes["animate"] = true;
+      classes["animate-" + highlight] = true;
     }
 
     let style = {};

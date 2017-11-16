@@ -11,6 +11,7 @@ import {CSSTransition, TransitionGroup} from 'react-transition-group'
 import ScrollArea from 'react-scrollbar';
 
 const PRODUCT_PREVIEW_SCALE = 0.26;
+const INPUT_CHANGE_DELAY = 1000;
 
 class InputDebounced extends Component {
 
@@ -24,7 +25,7 @@ class InputDebounced extends Component {
   }
 
   componentWillMount() {
-    this.forwardChange = debounce(this.props.onChange, 1500);
+    this.forwardChange = debounce(this.props.onChange, INPUT_CHANGE_DELAY);
   }
 
   onChange = e => {
@@ -34,7 +35,7 @@ class InputDebounced extends Component {
   };
 
   render() {
-    return <Input {...this.props} onChange={this.onChange} value={this.state.value} />
+    return <Input {...this.props} onChange={this.onChange} value={this.state.value}/>
   }
 }
 

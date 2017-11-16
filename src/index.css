@@ -7207,9 +7207,9 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       transition: all 0.2s ease;
       transform-origin: 100% 0; }
       .Previewer .book .cover > li {
-        background-position: -4mm;
+        background-position: center center;
         background-color: #eee;
-        background-size: 108%;
+        background-size: 107%;
         background-repeat: no-repeat;
         backface-visibility: hidden;
         cursor: default;
@@ -7399,228 +7399,228 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       color: #fff; }
     .Previewer .book.color-sunshine .page > li {
       background: #fee5a4; }
-    .Previewer .book.p25 .cover.front {
-      transform: rotateX(42.5deg) translateZ(0); }
-    .Previewer .book.highlight-frontOuter {
-      transform: scale(1.1); }
-    .Previewer .book.highlight-frontInner {
-      transform: translateY(100px) scale(1.1); }
-      .Previewer .book.highlight-frontInner .cover.front {
+    .Previewer .book.p15 .cover.front {
+      transform: rotateX(41.5deg) translateZ(0); }
+    .Previewer .book.animate-frontInner {
+      transform: translateY(50%); }
+      .Previewer .book.animate-frontInner .cover.front {
         transform: rotateX(155deg); }
-    .Previewer .book.highlight-backInner {
-      transform: translateY(0) scale(1.1); }
-      .Previewer .book.highlight-backInner .cover.front {
+    .Previewer .book.animate-backInner {
+      transform: rotateZ(0) translateY(50%) rotateX(0); }
+      .Previewer .book.animate-backInner .cover.front {
         transition: z-index 0s;
         transform: rotateX(155deg);
         z-index: 0; }
-      .Previewer .book.highlight-backInner .page li:nth-child(0) {
+      .Previewer .book.animate-backInner .cover.back li:first-child .highlight {
+        background-color: rgba(247, 69, 97, 0.2); }
+      .Previewer .book.animate-backInner .page li:nth-child(0) {
         transform: rotateX(140deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(1) {
+      .Previewer .book.animate-backInner .page li:nth-child(1) {
         transform: rotateX(140.1deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(2) {
+      .Previewer .book.animate-backInner .page li:nth-child(2) {
         transform: rotateX(140.2deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(3) {
+      .Previewer .book.animate-backInner .page li:nth-child(3) {
         transform: rotateX(140.3deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(4) {
+      .Previewer .book.animate-backInner .page li:nth-child(4) {
         transform: rotateX(140.4deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(5) {
+      .Previewer .book.animate-backInner .page li:nth-child(5) {
         transform: rotateX(140.5deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(6) {
+      .Previewer .book.animate-backInner .page li:nth-child(6) {
         transform: rotateX(140.6deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(7) {
+      .Previewer .book.animate-backInner .page li:nth-child(7) {
         transform: rotateX(140.7deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(8) {
+      .Previewer .book.animate-backInner .page li:nth-child(8) {
         transform: rotateX(140.8deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(9) {
+      .Previewer .book.animate-backInner .page li:nth-child(9) {
         transform: rotateX(140.9deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(10) {
+      .Previewer .book.animate-backInner .page li:nth-child(10) {
         transform: rotateX(141deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(11) {
+      .Previewer .book.animate-backInner .page li:nth-child(11) {
         transform: rotateX(141.1deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(12) {
+      .Previewer .book.animate-backInner .page li:nth-child(12) {
         transform: rotateX(141.2deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(13) {
+      .Previewer .book.animate-backInner .page li:nth-child(13) {
         transform: rotateX(141.3deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(14) {
+      .Previewer .book.animate-backInner .page li:nth-child(14) {
         transform: rotateX(141.4deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(15) {
+      .Previewer .book.animate-backInner .page li:nth-child(15) {
         transform: rotateX(141.5deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(16) {
+      .Previewer .book.animate-backInner .page li:nth-child(16) {
         transform: rotateX(141.6deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(17) {
+      .Previewer .book.animate-backInner .page li:nth-child(17) {
         transform: rotateX(141.7deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(18) {
+      .Previewer .book.animate-backInner .page li:nth-child(18) {
         transform: rotateX(141.8deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(19) {
+      .Previewer .book.animate-backInner .page li:nth-child(19) {
         transform: rotateX(141.9deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(20) {
+      .Previewer .book.animate-backInner .page li:nth-child(20) {
         transform: rotateX(142deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(21) {
+      .Previewer .book.animate-backInner .page li:nth-child(21) {
         transform: rotateX(142.1deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(22) {
+      .Previewer .book.animate-backInner .page li:nth-child(22) {
         transform: rotateX(142.2deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(23) {
+      .Previewer .book.animate-backInner .page li:nth-child(23) {
         transform: rotateX(142.3deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(24) {
+      .Previewer .book.animate-backInner .page li:nth-child(24) {
         transform: rotateX(142.4deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(25) {
+      .Previewer .book.animate-backInner .page li:nth-child(25) {
         transform: rotateX(142.5deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(26) {
+      .Previewer .book.animate-backInner .page li:nth-child(26) {
         transform: rotateX(142.6deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(27) {
+      .Previewer .book.animate-backInner .page li:nth-child(27) {
         transform: rotateX(142.7deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(28) {
+      .Previewer .book.animate-backInner .page li:nth-child(28) {
         transform: rotateX(142.8deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(29) {
+      .Previewer .book.animate-backInner .page li:nth-child(29) {
         transform: rotateX(142.9deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(30) {
+      .Previewer .book.animate-backInner .page li:nth-child(30) {
         transform: rotateX(143deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(31) {
+      .Previewer .book.animate-backInner .page li:nth-child(31) {
         transform: rotateX(143.1deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(32) {
+      .Previewer .book.animate-backInner .page li:nth-child(32) {
         transform: rotateX(143.2deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(33) {
+      .Previewer .book.animate-backInner .page li:nth-child(33) {
         transform: rotateX(143.3deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(34) {
+      .Previewer .book.animate-backInner .page li:nth-child(34) {
         transform: rotateX(143.4deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(35) {
+      .Previewer .book.animate-backInner .page li:nth-child(35) {
         transform: rotateX(143.5deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(36) {
+      .Previewer .book.animate-backInner .page li:nth-child(36) {
         transform: rotateX(143.6deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(37) {
+      .Previewer .book.animate-backInner .page li:nth-child(37) {
         transform: rotateX(143.7deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(38) {
+      .Previewer .book.animate-backInner .page li:nth-child(38) {
         transform: rotateX(143.8deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(39) {
+      .Previewer .book.animate-backInner .page li:nth-child(39) {
         transform: rotateX(143.9deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(40) {
+      .Previewer .book.animate-backInner .page li:nth-child(40) {
         transform: rotateX(144deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(41) {
+      .Previewer .book.animate-backInner .page li:nth-child(41) {
         transform: rotateX(144.1deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(42) {
+      .Previewer .book.animate-backInner .page li:nth-child(42) {
         transform: rotateX(144.2deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(43) {
+      .Previewer .book.animate-backInner .page li:nth-child(43) {
         transform: rotateX(144.3deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(44) {
+      .Previewer .book.animate-backInner .page li:nth-child(44) {
         transform: rotateX(144.4deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(45) {
+      .Previewer .book.animate-backInner .page li:nth-child(45) {
         transform: rotateX(144.5deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(46) {
+      .Previewer .book.animate-backInner .page li:nth-child(46) {
         transform: rotateX(144.6deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(47) {
+      .Previewer .book.animate-backInner .page li:nth-child(47) {
         transform: rotateX(144.7deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(48) {
+      .Previewer .book.animate-backInner .page li:nth-child(48) {
         transform: rotateX(144.8deg); }
-      .Previewer .book.highlight-backInner .page li:nth-child(49) {
+      .Previewer .book.animate-backInner .page li:nth-child(49) {
         transform: rotateX(144.9deg); }
-    .Previewer .book.highlight-backOuter {
-      transform: rotateZ(180deg) translateY(120%) scale(1.1); }
-      .Previewer .book.highlight-backOuter .cover.front {
+    .Previewer .book.animate-backOuter {
+      transform: rotateZ(180deg) translateY(90%); }
+      .Previewer .book.animate-backOuter .cover.front {
         transform: rotateX(155deg);
         z-index: 0; }
-      .Previewer .book.highlight-backOuter .cover.back {
+      .Previewer .book.animate-backOuter .cover.back {
         transform: rotateX(130deg);
         box-shadow: none;
         z-index: 10; }
-      .Previewer .book.highlight-backOuter .page li:nth-child(0) {
+      .Previewer .book.animate-backOuter .page li:nth-child(0) {
         transform: rotateX(150deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(1) {
+      .Previewer .book.animate-backOuter .page li:nth-child(1) {
         transform: rotateX(151deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(2) {
+      .Previewer .book.animate-backOuter .page li:nth-child(2) {
         transform: rotateX(152deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(3) {
+      .Previewer .book.animate-backOuter .page li:nth-child(3) {
         transform: rotateX(153deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(4) {
+      .Previewer .book.animate-backOuter .page li:nth-child(4) {
         transform: rotateX(154deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(5) {
+      .Previewer .book.animate-backOuter .page li:nth-child(5) {
         transform: rotateX(155deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(6) {
+      .Previewer .book.animate-backOuter .page li:nth-child(6) {
         transform: rotateX(156deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(7) {
+      .Previewer .book.animate-backOuter .page li:nth-child(7) {
         transform: rotateX(157deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(8) {
+      .Previewer .book.animate-backOuter .page li:nth-child(8) {
         transform: rotateX(158deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(9) {
+      .Previewer .book.animate-backOuter .page li:nth-child(9) {
         transform: rotateX(159deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(10) {
+      .Previewer .book.animate-backOuter .page li:nth-child(10) {
         transform: rotateX(160deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(11) {
+      .Previewer .book.animate-backOuter .page li:nth-child(11) {
         transform: rotateX(161deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(12) {
+      .Previewer .book.animate-backOuter .page li:nth-child(12) {
         transform: rotateX(162deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(13) {
+      .Previewer .book.animate-backOuter .page li:nth-child(13) {
         transform: rotateX(163deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(14) {
+      .Previewer .book.animate-backOuter .page li:nth-child(14) {
         transform: rotateX(164deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(15) {
+      .Previewer .book.animate-backOuter .page li:nth-child(15) {
         transform: rotateX(165deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(16) {
+      .Previewer .book.animate-backOuter .page li:nth-child(16) {
         transform: rotateX(166deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(17) {
+      .Previewer .book.animate-backOuter .page li:nth-child(17) {
         transform: rotateX(167deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(18) {
+      .Previewer .book.animate-backOuter .page li:nth-child(18) {
         transform: rotateX(168deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(19) {
+      .Previewer .book.animate-backOuter .page li:nth-child(19) {
         transform: rotateX(169deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(20) {
+      .Previewer .book.animate-backOuter .page li:nth-child(20) {
         transform: rotateX(170deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(21) {
+      .Previewer .book.animate-backOuter .page li:nth-child(21) {
         transform: rotateX(171deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(22) {
+      .Previewer .book.animate-backOuter .page li:nth-child(22) {
         transform: rotateX(172deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(23) {
+      .Previewer .book.animate-backOuter .page li:nth-child(23) {
         transform: rotateX(173deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(24) {
+      .Previewer .book.animate-backOuter .page li:nth-child(24) {
         transform: rotateX(174deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(25) {
+      .Previewer .book.animate-backOuter .page li:nth-child(25) {
         transform: rotateX(175deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(26) {
+      .Previewer .book.animate-backOuter .page li:nth-child(26) {
         transform: rotateX(176deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(27) {
+      .Previewer .book.animate-backOuter .page li:nth-child(27) {
         transform: rotateX(177deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(28) {
+      .Previewer .book.animate-backOuter .page li:nth-child(28) {
         transform: rotateX(178deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(29) {
+      .Previewer .book.animate-backOuter .page li:nth-child(29) {
         transform: rotateX(179deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(30) {
+      .Previewer .book.animate-backOuter .page li:nth-child(30) {
         transform: rotateX(180deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(31) {
+      .Previewer .book.animate-backOuter .page li:nth-child(31) {
         transform: rotateX(181deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(32) {
+      .Previewer .book.animate-backOuter .page li:nth-child(32) {
         transform: rotateX(182deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(33) {
+      .Previewer .book.animate-backOuter .page li:nth-child(33) {
         transform: rotateX(183deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(34) {
+      .Previewer .book.animate-backOuter .page li:nth-child(34) {
         transform: rotateX(184deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(35) {
+      .Previewer .book.animate-backOuter .page li:nth-child(35) {
         transform: rotateX(185deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(36) {
+      .Previewer .book.animate-backOuter .page li:nth-child(36) {
         transform: rotateX(186deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(37) {
+      .Previewer .book.animate-backOuter .page li:nth-child(37) {
         transform: rotateX(187deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(38) {
+      .Previewer .book.animate-backOuter .page li:nth-child(38) {
         transform: rotateX(188deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(39) {
+      .Previewer .book.animate-backOuter .page li:nth-child(39) {
         transform: rotateX(189deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(40) {
+      .Previewer .book.animate-backOuter .page li:nth-child(40) {
         transform: rotateX(190deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(41) {
+      .Previewer .book.animate-backOuter .page li:nth-child(41) {
         transform: rotateX(191deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(42) {
+      .Previewer .book.animate-backOuter .page li:nth-child(42) {
         transform: rotateX(192deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(43) {
+      .Previewer .book.animate-backOuter .page li:nth-child(43) {
         transform: rotateX(193deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(44) {
+      .Previewer .book.animate-backOuter .page li:nth-child(44) {
         transform: rotateX(194deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(45) {
+      .Previewer .book.animate-backOuter .page li:nth-child(45) {
         transform: rotateX(195deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(46) {
+      .Previewer .book.animate-backOuter .page li:nth-child(46) {
         transform: rotateX(196deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(47) {
+      .Previewer .book.animate-backOuter .page li:nth-child(47) {
         transform: rotateX(197deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(48) {
+      .Previewer .book.animate-backOuter .page li:nth-child(48) {
         transform: rotateX(198deg); }
-      .Previewer .book.highlight-backOuter .page li:nth-child(49) {
+      .Previewer .book.animate-backOuter .page li:nth-child(49) {
         transform: rotateX(199deg); }
     .Previewer .book:hover {
       transform: translateY(0.5rem) scale(1); }
@@ -7751,7 +7751,9 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     padding-top: 5% !important; }
   #step2 .product .custom-control-indicator {
     background: #F8F8F8;
-    box-shadow: 0 0 0 3px #fff, 0 0 0 5px #868686; }
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px #868686;
+    width: 0.8rem;
+    height: 0.8rem; }
   #step2 .product .was-validated .custom-control-input:invalid ~ .custom-control-indicator, #step2 .product .custom-control-input.is-invalid ~ .custom-control-indicator {
     background-color: rgba(220, 53, 69, 0.25);
     box-shadow: 0 0 0 3px #fff, 0 0 0 5px #dc3545; }

@@ -200,6 +200,8 @@
       background: #F8F8F8;
       //border: 2px solid #868686;
       box-shadow: 0 0 0 3px #fff, 0 0 0 5px #868686;
+      width: 0.8rem;
+      height: 0.8rem;
     }
 
     .was-validated .custom-control-input:invalid ~ .custom-control-indicator, .custom-control-input.is-invalid ~ .custom-control-indicator {

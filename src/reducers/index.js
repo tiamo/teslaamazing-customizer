@@ -1,6 +1,8 @@
 import {
   NEXT_STEP,
-  PREV_STEP, SET_PREVIEW,
+  PREV_STEP,
+  SET_PREVIEW,
+  RESET_PREVIEW,
   SET_SUCCESS_MESSAGE,
   TOGGLE_FIRST_SCREEN
 } from "../actions";
@@ -51,6 +53,16 @@ const reducer = (state = initialState, action) => {
         preview: {
           ...state.preview,
           [action.name]: action.value
+        }
+      };
+    case RESET_PREVIEW:
+      return {
+        ...state,
+        preview: {
+          frontOuter: null,
+          frontInner: null,
+          backInner: null,
+          backOuter: null,
         }
       };
     case PREV_STEP:

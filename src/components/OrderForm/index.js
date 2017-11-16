@@ -4,7 +4,7 @@ import {Button, Form, Modal, ModalBody} from 'reactstrap';
 import {connect} from "react-redux";
 import {reduxForm, SubmissionError} from "redux-form";
 
-import {nextStep, prevStep} from "../../actions";
+import {nextStep, prevStep, resetPreview} from "../../actions";
 import steps from "./steps";
 
 class OrderForm extends Component {
@@ -80,7 +80,7 @@ class OrderForm extends Component {
   validate = data => {
 
     let errors = {};
-    let {step} = this.props;
+    let {step, dispatch, change, resetPreview} = this.props;
 
     // errors._error = "test";
 
@@ -94,6 +94,12 @@ class OrderForm extends Component {
       if (!data.product) {
         errors.product = 'Please choose a product.';
       }
+
+      resetPreview();
+      dispatch(change("frontOuter", ""));
+      dispatch(change("frontInner", ""));
+      dispatch(change("backInner", ""));
+      dispatch(change("backOuter", ""));
     }
 
     if (step === 3) {
@@ -151,6 +157,9 @@ OrderForm = connect(
       },
       nextStep: () => {
         dispatch(nextStep())
+      },
+      resetPreview: () => {
+        dispatch(resetPreview())
       },
     }
   }

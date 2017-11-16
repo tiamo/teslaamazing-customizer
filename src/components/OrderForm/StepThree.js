@@ -15,6 +15,8 @@ import {
   TECHNICAL_REQUIREMENTS_URL
 } from "../../constants";
 
+import {debounce} from "lodash";
+
 // const pdfjs = require('pdfjs-dist');
 // require('pdfjs-dist/web/compatibility');
 // pdfjs.PDFJS.workerSrc = 'pdf.worker.js';
@@ -50,6 +52,10 @@ class StepThree extends Component {
       highlightPreview: null,
     };
     this.hlTimer = 0;
+
+    this.animatePreviewerDebounced = debounce((name) => {
+      this.animatePreviewer(name);
+    }, 250);
   }
 
   componentDidMount() {
@@ -102,18 +108,21 @@ class StepThree extends Component {
           if (pdfSize[0] !== validSize[0] || pdfSize[1] !== validSize[1]) {
 
             throw new Error('Incorrect pdf size. Your size is ' + pdfSize.join('x') + ' ' + PRODUCT_SIZE_UNIT +
-            ', expected size is ' + validSize.join('x') + ' ' + PRODUCT_SIZE_UNIT + '.');
+              ', expected size is ' + validSize.join('x') + ' ' + PRODUCT_SIZE_UNIT + '.');
 
           } else {
             let canvas = this.refs["canvas." + name];
             if (canvas) {
+
+
+              let ctx = canvas.getContext('2d');
 
               // x3 for better image quality
               canvas.width = viewport.width * 3;
               canvas.height = viewport.height * 3;
 
               // validate text elements
-              page.getTextContent().then((res)=> {
+              page.getTextContent().then((res) => {
 
                 if (res.items.length) {
                   throw new Error('Invalid pdf file. Your file contains text elements, it needs to upload a vector file.');
@@ -121,10 +130,12 @@ class StepThree extends Component {
 
                   // render page
                   page.render({
-                    canvasContext: canvas.getContext('2d'),
+                    canvasContext: ctx,
                     viewport: page.getViewport(canvas.width / page.getViewport(1).width),
                   }).then(() => {
                     this.props.setPreview(name, canvas.toDataURL('image/jpeg'));
+                    // free up memory
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
                   });
                 }
               }).catch((error) => {
@@ -164,10 +175,10 @@ class StepThree extends Component {
         <div className="item-heading">{label}</div>
         <div className="item-body"
              onMouseEnter={() => {
-               return this.animatePreviewer(name);
+               this.animatePreviewerDebounced(name);
              }}
              onMouseLeave={() => {
-               return this.animatePreviewer(null);
+               this.animatePreviewerDebounced(null);
              }}
         >
           {value && !error && !asyncValidating ? (
@@ -176,11 +187,11 @@ class StepThree extends Component {
                   {value.name}
               </span>
               <span className="icon-success icon-valid"/>
-              <button type="button" className="btn btn-link"
+              <button type="button" className="btn btn-sm btn-link"
                       onClick={() => {
                         // if (window.confirm('Are you sure?')) {
-                          onChange(null);
-                          this.props.setPreview(name, null)
+                        onChange(null);
+                        this.props.setPreview(name, null)
                         // }
                       }}>
                 Delete

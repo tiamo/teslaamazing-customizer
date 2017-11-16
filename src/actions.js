@@ -5,6 +5,7 @@ export const SET_SUCCESS_MESSAGE = prefix + "SET_SUCCESS_MESSAGE";
 export const NEXT_STEP = prefix + "NEXT_STEP";
 export const PREV_STEP = prefix + "PREV_STEP";
 export const SET_PREVIEW = prefix + "SET_PREVIEW";
+export const RESET_PREVIEW = prefix + "RESET_PREVIEW";
 
 export const toggleFirstScreen = () => {
   return {
@@ -24,6 +25,12 @@ export const setPreview = (name, value) => {
     type: SET_PREVIEW,
     name: name,
     value: value,
+  }
+};
+
+export const resetPreview = () => {
+  return {
+    type: RESET_PREVIEW,
   }
 };
 
