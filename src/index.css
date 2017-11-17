@@ -7201,8 +7201,6 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       transform-style: preserve-3d; }
       .Previewer .book .cover:before, .Previewer .book .cover:after, .Previewer .book .cover > li:before, .Previewer .book .cover > li:after, .Previewer .book .page:before, .Previewer .book .page:after, .Previewer .book .page > li:before, .Previewer .book .page > li:after {
         content: ""; }
-    .Previewer .book .cover > li, .Previewer .book .page > li {
-      box-shadow: inset 0 0 5px rgba(150, 150, 150, 0.1), inset 0 0 1px rgba(200, 200, 200, 0.1); }
     .Previewer .book .cover {
       transition: all 0.2s ease;
       transform-origin: 100% 0; }
@@ -7240,8 +7238,7 @@ a.text-sunshine:focus, a.text-sunshine:hover {
         transform-origin: center top;
         transition-property: transform;
         transition-timing-function: ease;
-        background: linear-gradient(0, #e1ddd8 0%, #fffbf6 100%);
-        box-shadow: inset 0px -1px 1px rgba(85, 85, 85, 0.1), inset 0 40px 100px rgba(102, 102, 102, 0.1);
+        background: #fff;
         transition-duration: 0.3s; }
         .Previewer .book .page > li:nth-child(50) {
           transform: rotateX(45deg); }
@@ -7346,59 +7343,59 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     .Previewer .book.color-yellow .front {
       color: #fff; }
     .Previewer .book.color-yellow .page > li {
-      background: #efe46d; }
+      background: linear-gradient(to bottom, #e7d728 0%, #efe46d 99%, #eaeaea 100%); }
     .Previewer .book.color-blue .front {
       color: #fff; }
     .Previewer .book.color-blue .page > li {
-      background: #3ec4e6; }
+      background: linear-gradient(to bottom, #199dbe 0%, #3ec4e6 99%, #eaeaea 100%); }
     .Previewer .book.color-green .front {
       color: #fff; }
     .Previewer .book.color-green .page > li {
-      background: #8ed04f; }
+      background: linear-gradient(to bottom, #67a62d 0%, #8ed04f 99%, #eaeaea 100%); }
     .Previewer .book.color-orange .front {
       color: #fff; }
     .Previewer .book.color-orange .page > li {
-      background: #eb9552; }
+      background: linear-gradient(to bottom, #d86c19 0%, #eb9552 99%, #eaeaea 100%); }
     .Previewer .book.color-pink .front {
       color: #fff; }
     .Previewer .book.color-pink .page > li {
-      background: #edbada; }
+      background: linear-gradient(to bottom, #de7db9 0%, #edbada 99%, #eaeaea 100%); }
     .Previewer .book.color-violet .front {
       color: #fff; }
     .Previewer .book.color-violet .page > li {
-      background: #b06ebb; }
+      background: linear-gradient(to bottom, #8b4796 0%, #b06ebb 99%, #eaeaea 100%); }
     .Previewer .book.color-white .front {
       color: #fff; }
     .Previewer .book.color-white .page > li {
-      background: white; }
+      background: linear-gradient(to bottom, #ebebeb 0%, white 99%, #eaeaea 100%); }
     .Previewer .book.color-transparent .front {
       color: #fff; }
     .Previewer .book.color-transparent .page > li {
-      background: #fff; }
+      background: linear-gradient(to bottom, #e1e1e1 0%, white 99%, #eaeaea 100%); }
     .Previewer .book.color-aqua .front {
       color: #fff; }
     .Previewer .book.color-aqua .page > li {
-      background: #8cdfe4; }
+      background: linear-gradient(to bottom, #4eced5 0%, #8cdfe4 99%, #eaeaea 100%); }
     .Previewer .book.color-mint .front {
       color: #fff; }
     .Previewer .book.color-mint .page > li {
-      background: #c3e3a1; }
+      background: linear-gradient(to bottom, #9dd265 0%, #c3e3a1 99%, #eaeaea 100%); }
     .Previewer .book.color-peachy .front {
       color: #fff; }
     .Previewer .book.color-peachy .page > li {
-      background: #fdc0a5; }
+      background: linear-gradient(to bottom, #fb8c5a 0%, #fdc0a5 99%, #eaeaea 100%); }
     .Previewer .book.color-pearl .front {
       color: #fff; }
     .Previewer .book.color-pearl .page > li {
-      background: #decae3; }
+      background: linear-gradient(to bottom, #c097c9 0%, #decae3 99%, #eaeaea 100%); }
     .Previewer .book.color-spring .front {
       color: #fff; }
     .Previewer .book.color-spring .page > li {
-      background: #fdb3a8; }
+      background: linear-gradient(to bottom, #fb715d 0%, #fdb3a8 99%, #eaeaea 100%); }
     .Previewer .book.color-sunshine .front {
       color: #fff; }
     .Previewer .book.color-sunshine .page > li {
-      background: #fee5a4; }
+      background: linear-gradient(to bottom, #fecf58 0%, #fee5a4 99%, #eaeaea 100%); }
     .Previewer .book.p15 .cover.front {
       transform: rotateX(41.5deg) translateZ(0); }
     .Previewer .book.animate-frontInner {
