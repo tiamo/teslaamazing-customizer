@@ -7343,59 +7343,73 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     .Previewer .book.color-yellow .front {
       color: #fff; }
     .Previewer .book.color-yellow .page > li {
-      background: linear-gradient(to bottom, #e7d728 0%, #efe46d 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #e7d728 0%, #efe46d 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-blue .front {
       color: #fff; }
     .Previewer .book.color-blue .page > li {
-      background: linear-gradient(to bottom, #199dbe 0%, #3ec4e6 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #199dbe 0%, #3ec4e6 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-green .front {
       color: #fff; }
     .Previewer .book.color-green .page > li {
-      background: linear-gradient(to bottom, #67a62d 0%, #8ed04f 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #67a62d 0%, #8ed04f 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-orange .front {
       color: #fff; }
     .Previewer .book.color-orange .page > li {
-      background: linear-gradient(to bottom, #d86c19 0%, #eb9552 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #d86c19 0%, #eb9552 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-pink .front {
       color: #fff; }
     .Previewer .book.color-pink .page > li {
-      background: linear-gradient(to bottom, #de7db9 0%, #edbada 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #de7db9 0%, #edbada 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-violet .front {
       color: #fff; }
     .Previewer .book.color-violet .page > li {
-      background: linear-gradient(to bottom, #8b4796 0%, #b06ebb 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #8b4796 0%, #b06ebb 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-white .front {
       color: #fff; }
     .Previewer .book.color-white .page > li {
-      background: linear-gradient(to bottom, #ebebeb 0%, white 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #ebebeb 0%, white 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-transparent .front {
       color: #fff; }
     .Previewer .book.color-transparent .page > li {
-      background: linear-gradient(to bottom, #e1e1e1 0%, white 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #e1e1e1 0%, white 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-aqua .front {
       color: #fff; }
     .Previewer .book.color-aqua .page > li {
-      background: linear-gradient(to bottom, #4eced5 0%, #8cdfe4 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #4eced5 0%, #8cdfe4 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-mint .front {
       color: #fff; }
     .Previewer .book.color-mint .page > li {
-      background: linear-gradient(to bottom, #9dd265 0%, #c3e3a1 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #9dd265 0%, #c3e3a1 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-peachy .front {
       color: #fff; }
     .Previewer .book.color-peachy .page > li {
-      background: linear-gradient(to bottom, #fb8c5a 0%, #fdc0a5 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #fb8c5a 0%, #fdc0a5 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-pearl .front {
       color: #fff; }
     .Previewer .book.color-pearl .page > li {
-      background: linear-gradient(to bottom, #c097c9 0%, #decae3 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #c097c9 0%, #decae3 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-spring .front {
       color: #fff; }
     .Previewer .book.color-spring .page > li {
-      background: linear-gradient(to bottom, #fb715d 0%, #fdb3a8 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #fb715d 0%, #fdb3a8 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.color-sunshine .front {
       color: #fff; }
     .Previewer .book.color-sunshine .page > li {
-      background: linear-gradient(to bottom, #fecf58 0%, #fee5a4 99%, #eaeaea 100%); }
+      background: linear-gradient(to bottom, #fecf58 0%, #fee5a4 100%);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.8); }
     .Previewer .book.p15 .cover.front {
       transform: rotateX(41.5deg) translateZ(0); }
     .Previewer .book.animate-frontInner {

@@ -214,9 +214,11 @@ $rotate-factor: 0.1;
               background: linear-gradient(to bottom,
                       darken($color, 5) 0%,
                       //lighten($color, 20) 8%,
-                      lighten($color, 10) 99%,
-                      rgb(234, 234, 234) 100%
+                      lighten($color, 10) 100%
+                      //rgb(234, 234, 234) 100%
               );
+
+            border-bottom: 1px solid rgba(234, 234, 234, 0.8)
 
             //}
           }
