@@ -523,20 +523,27 @@
 }
 
 @include media-breakpoint-down(sm) {
-  .OrderForm-header {
-    font-size: 1.8rem;
-    line-height: 3rem;
-    > span {
-      font-size: 1.548rem;
-      float: left;
-      border: 1px solid #656565;
-      border-radius: 100%;
-      width: 3rem;
-      height: 3rem;
+  .OrderForm {
+    &-header {
+      font-size: 1.8rem;
       line-height: 3rem;
-      text-align: center;
-      margin: 0 14px 0 0;
-      font-weight: 200;
+      > span {
+        font-size: 1.548rem;
+        float: left;
+        border: 1px solid #656565;
+        border-radius: 100%;
+        width: 3rem;
+        height: 3rem;
+        line-height: 3rem;
+        text-align: center;
+        margin: 0 14px 0 0;
+        font-weight: 200;
+      }
+    }
+    &-footer {
+      .btn {
+        width: 100%;
+      }
     }
   }
 }

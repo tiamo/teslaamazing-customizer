@@ -108,7 +108,7 @@ class StepThree extends Component {
           if (pdfSize[0] !== validSize[0] || pdfSize[1] !== validSize[1]) {
 
             throw new Error('Incorrect pdf size. Your size is ' + pdfSize.join('x') + ' ' + PRODUCT_SIZE_UNIT +
-              ', expected size is ' + validSize.join('x') + ' ' + PRODUCT_SIZE_UNIT + '.');
+              ', allowed size is ' + validSize.join('x') + ' ' + PRODUCT_SIZE_UNIT + '.');
 
           } else {
             let canvas = this.refs["canvas." + name];

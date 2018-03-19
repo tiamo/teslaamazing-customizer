@@ -60,3 +60,16 @@
     float: left;
   }
 }
+
+.preloader {
+  height: 100%;
+  .modal-content {
+    background: none;
+    border: 0;
+  }
+  .modal-body {
+    color: #fff;
+    text-align: center;
+    padding-top: 70%;
+  }
+}

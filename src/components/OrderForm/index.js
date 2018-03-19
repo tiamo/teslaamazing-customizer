@@ -40,15 +40,20 @@ class OrderForm extends Component {
         </div>
         <div className="OrderForm-footer">
           {step > 1 && (
-            <Button type="button" size="lg" color="outline-secondary" onClick={() => {
-              prevStep();
-            }}
-                    disabled={submitting || asyncValidating !== false}>
+            <Button type="button" size="lg"
+                    color="outline-secondary"
+                    onClick={() => {
+                      prevStep();
+                    }}
+                    disabled={submitting || asyncValidating !== false}
+            >
               Prev Step
             </Button>
           )}
-          <Button type="submit" size="lg" color="outline-secondary"
-                  disabled={submitting || asyncValidating !== false}>
+          <Button type="submit" size="lg"
+                  color="outline-secondary"
+                  disabled={submitting || asyncValidating !== false}
+          >
             Next Step
           </Button>
         </div>

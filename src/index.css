@@ -7133,6 +7133,16 @@ a.text-sunshine:focus, a.text-sunshine:hover {
     margin: 22px 0 18px 26px;
     float: left; }
 
+.preloader {
+  height: 100%; }
+  .preloader .modal-content {
+    background: none;
+    border: 0; }
+  .preloader .modal-body {
+    color: #fff;
+    text-align: center;
+    padding-top: 70%; }
+
 .FirstScreen {
   background: url(./assets/bg.jpg) no-repeat center center;
   background-size: cover;
@@ -7978,4 +7988,6 @@ a.text-sunshine:focus, a.text-sunshine:hover {
       line-height: 3rem;
       text-align: center;
       margin: 0 14px 0 0;
-      font-weight: 200; } }
+      font-weight: 200; }
+  .OrderForm-footer .btn {
+    width: 100%; } }

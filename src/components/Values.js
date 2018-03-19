@@ -10,6 +10,7 @@ const Values = ({form, format = values => JSON.stringify(values, null, 2)}) => {
     position: 'fixed',
     top: 0,
     left: 0,
+    zIndex: 9999,
     fontSize: '0.6rem',
   };
 

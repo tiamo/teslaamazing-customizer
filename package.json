@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.0.0-beta",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",

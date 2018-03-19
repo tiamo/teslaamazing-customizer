@@ -8,20 +8,20 @@ import {
 } from "../actions";
 
 const initialState = {
-  firstScreen: process.env.NODE_ENV !== 'development',
+  firstScreen: false,
   successMessage: null,
-  step: 1,
+  step: 3,
   data: {
-    // name: "test",
-    // product: "M",
+    name: "test",
+    product: "M",
     items: {
-      // fixme: redux-form removes items object when it's empty
       "_": null,
-      // "009": 112,
-      // "010": 112,
-      // "011": 112,
+      "009": 111,
       // "012": 112,
-    }
+    },
+    frontInner: false,
+    backInner: false,
+    backOuter: false,
   },
   preview: {
     // image url
@@ -31,6 +31,25 @@ const initialState = {
     backOuter: null,
   }
 };
+
+// const initialState = {
+//   firstScreen: process.env.NODE_ENV !== 'development',
+//   successMessage: null,
+//   step: 1,
+//   data: {
+//     items: {
+//       // fixme: redux-form removes items object when it's empty
+//       "_": null,
+//     }
+//   },
+//   preview: {
+//     // image url
+//     frontOuter: null,
+//     frontInner: null,
+//     backInner: null,
+//     backOuter: null,
+//   }
+// };
 
 const reducer = (state = initialState, action) => {
 

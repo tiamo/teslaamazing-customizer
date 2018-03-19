@@ -123,10 +123,10 @@ Previewer.defaultProps = {
 
 Previewer.propTypes = {
   product: PropTypes.string.isRequired,
-  frontOuter: PropTypes.string,
-  frontInner: PropTypes.string,
-  backInner: PropTypes.string,
-  backOuter: PropTypes.string,
+  // frontOuter: PropTypes.string,
+  // frontInner: PropTypes.string,
+  // backInner: PropTypes.string,
+  // backOuter: PropTypes.string,
 };
 
 Previewer = connect(
