@@ -23,10 +23,10 @@ set('writable_dirs', []);
 // Hosts
 
 host('teslaamazing.com')
-//    ->stage('staging')
     ->user('teslaamazing')
     ->identityFile('~/.ssh/id_rsa')
     ->set('deploy_path', '/var/www/teslaamazing/data/www/customizer.teslaamazing.com');
+
 
 // Tasks
 
